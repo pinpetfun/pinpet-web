@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FFFBEB;
+    color: #4A3C31;
+    margin: 0;
+  }
+  
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  .btn-cartoon {
+    @apply font-fredoka text-black bg-yellow-400 border-2 border-black rounded-lg px-4 py-2 shadow-cartoon-sm hover:bg-yellow-500 transition-all duration-200;
+  }
+  
+  .btn-cartoon:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px 0px rgba(0,0,0,1);
+  }
+  
+  .card-cartoon {
+    @apply bg-white border-4 border-black rounded-2xl shadow-cartoon transition-transform duration-300;
+  }
+  
+  .card-cartoon:hover {
+    transform: translateY(-8px);
+  }
+}
