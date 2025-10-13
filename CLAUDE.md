@@ -8,6 +8,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 常用开发命令
 
+### 
+文档都写到 notes 目录,用md格式
+
+
 ### 开发和构建
 ```bash
 # 启动开发服务器
@@ -73,21 +77,39 @@ src/
 ├── config.js             # 环境变量配置管理
 ├── App.css               # 应用样式
 ├── index.css             # 全局样式 (Tailwind + 自定义)
-├── components/           # React 组件库
-│   ├── Header/
-│   │   └── Navigation.jsx    # 导航栏组件
-│   ├── Card/
-│   │   └── ProjectCard.jsx   # 项目卡片组件
-│   ├── Search/
-│   │   └── SearchAndFilters.jsx # 搜索筛选组件
-│   └── Layout/
-│       ├── Container.jsx     # 容器布局
-│       └── HeroSection.jsx   # 主页Hero区域
-├── pages/
-│   └── HomePage.jsx          # 主页面组件
+├── components/           # React 组件库 (已重构为模块化结构)
+│   ├── common/           # 通用组件
+│   │   ├── Header.jsx        # 页面头部导航
+│   │   ├── Footer.jsx        # 页面底部
+│   │   ├── WalletButton.jsx  # 钱包连接按钮
+│   │   ├── TokenCard.jsx     # 代币卡片组件
+│   │   ├── SdkTestComponent.jsx # SDK测试组件
+│   │   └── index.js          # 统一导出
+│   ├── pages/            # 页面级组件
+│   │   ├── HomePage.jsx      # 主页面
+│   │   ├── CreatePage.jsx    # 创建代币页面
+│   │   ├── TradeCenterPage.jsx # 交易中心页面
+│   │   └── index.js          # 统一导出
+│   ├── home/             # 首页相关组件
+│   │   ├── HeroSection.jsx   # 主页Hero区域
+│   │   ├── HotProjectsSection.jsx # 热门项目区域
+│   │   ├── FilterBar.jsx     # 筛选栏
+│   │   ├── FeaturedTokens.jsx # 精选代币
+│   │   └── index.js          # 统一导出
+│   ├── trading/          # 交易相关组件
+│   │   ├── TradingPanel.jsx  # 交易面板
+│   │   ├── TradingChart.jsx  # 交易图表
+│   │   ├── TokenInfo.jsx     # 代币信息
+│   │   ├── TokenInfoTabs.jsx # 代币信息标签页
+│   │   └── index.js          # 统一导出
+│   └── backup/           # 备份组件
+│       └── DropdownMenuTest.jsx
+├── contexts/             # React Context
+├── services/             # 服务层
+├── hooks/                # 自定义 Hooks
 ├── data/
-│   └── mockData.js           # 模拟数据
-└── assets/                   # 静态资源
+│   └── mockData.js       # 模拟数据
+└── assets/               # 静态资源
     └── react.svg
 
 example/             # HTML 示例和设计参考
@@ -96,6 +118,17 @@ example/             # HTML 示例和设计参考
 
 public/             # 公共静态资源
 └── vite.svg
+```
+
+### 组件导入方式
+项目采用模块化导入方式，每个组件文件夹都有统一的 `index.js` 导出文件：
+
+```javascript
+// 从不同模块导入组件
+import { Header, Footer, TokenCard } from './components/common';
+import { HomePage, CreatePage, TradeCenterPage } from './components/pages';
+import { HeroSection, FeaturedTokens } from './components/home';
+import { TradingPanel, TradingChart } from './components/trading';
 ```
 
 ### 关键配置文件

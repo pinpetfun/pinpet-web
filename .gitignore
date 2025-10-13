@@ -25,4 +25,12 @@ dist-ssr
 *.sln
 *.sw?
 
+notes/
+.claude/
+
+example/
+
+
+.env.local
+
 docs/
