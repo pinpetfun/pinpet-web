@@ -7,7 +7,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast } from '../common';
-import { getSlippageSettings } from '../../config/tradingConfig';
+import { getSlippageSettings, getActualSlippage } from '../../config/tradingConfig';
 
 const ShortPanel = React.memo(({
   tokenSymbol = "FRIENDS",
@@ -360,6 +360,7 @@ const ShortPanel = React.memo(({
       // 获取滑点设置
       const slippageSettings = getSlippageSettings();
       const slippagePercent = slippageSettings.slippage;
+      const actualSlippage = getActualSlippage(slippagePercent);
 
       // 计算参数 - 使用 SDK 返回的值
       const originalSolAmount = parseFloat(amount);
@@ -370,10 +371,10 @@ const ShortPanel = React.memo(({
       const borrowSellTokenAmount = new anchor.BN(stopLossAnalysis.sellTokenAmount.toString());
 
       // 计算 minSolOutput (positionValue减去滑点，9位精度)
-      const minSolOutput = calculateMinSolOutput(leveragedSolAmount, slippagePercent);
-      
+      const minSolOutput = calculateMinSolOutput(leveragedSolAmount, actualSlippage);
+
       // 计算 marginSol (保证金加上滑点，9位精度)
-      const marginSol = calculateMaxMarginSol(originalSolAmount, slippagePercent);
+      const marginSol = calculateMaxMarginSol(originalSolAmount, actualSlippage);
       
       // 止损参数
       const closePrice = new anchor.BN(stopLossAnalysis.executableStopLossPrice.toString());

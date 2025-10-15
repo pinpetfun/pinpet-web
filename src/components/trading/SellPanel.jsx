@@ -6,6 +6,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast } from '../common';
+import { getActualSlippage } from '../../config/tradingConfig';
 
 const SellPanel = React.memo(({
   mintAddress = "",
@@ -322,12 +323,14 @@ const SellPanel = React.memo(({
         calculatedSOLFloat = parseFloat(calculatedSOLStr.replace(/,/g, ''));
       }
       
-      const minSolOutput = calculateMinSolOutput(calculatedSOLFloat, slippageSettings.slippage);
+      const actualSlippage = getActualSlippage(slippageSettings.slippage);
+      const minSolOutput = calculateMinSolOutput(calculatedSOLFloat, actualSlippage);
 
       console.log('[SellPanel] 卖出参数:', {
         mintAddress,
         displayTokenAmount,
         slippagePercent: slippageSettings.slippage,
+        actualSlippagePercent: actualSlippage,
         calculatedSOL: calculatedSOLFloat,
         sellTokenAmount: sellTokenAmount.toString(),
         minSolOutput: minSolOutput.toString(),

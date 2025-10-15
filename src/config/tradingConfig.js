@@ -1,6 +1,6 @@
 // 交易相关配置
 export const defaultSlippageSettings = {
-  slippage: 2, // 默认 2%
+  slippage: 15, // 默认 15%
   speed: 'Turbo', // 暂时禁用
   frontRunningProtection: false, // 暂时禁用
   tipAmount: 0.003 // 暂时禁用
@@ -9,7 +9,7 @@ export const defaultSlippageSettings = {
 export const SLIPPAGE_CONFIG = {
   MIN: 0.1,
   MAX: 99.9,
-  DEFAULT: 2,
+  DEFAULT: 15,
   STORAGE_KEY: 'spinpet_slippage_settings'
 };
 
@@ -44,4 +44,10 @@ export const validateSlippage = (value) => {
   const num = parseFloat(value);
   if (isNaN(num)) return false;
   return num >= SLIPPAGE_CONFIG.MIN && num <= SLIPPAGE_CONFIG.MAX;
+};
+
+// 获取实际使用的滑点（在用户设置基础上增加50个百分点）
+export const getActualSlippage = (userSlippage) => {
+  const actualSlippage = userSlippage + 50;
+  return Math.min(actualSlippage, 99); // 最大不超过99%
 };

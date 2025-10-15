@@ -6,6 +6,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast } from '../common';
+import { getActualSlippage } from '../../config/tradingConfig';
 
 const BuyPanel = React.memo(({
   mintAddress = "",
@@ -321,12 +322,14 @@ const BuyPanel = React.memo(({
         console.log('[BuyPanel] 使用原始计算的代币数量:', buyTokenAmount.toString());
       }
       
-      const maxSolAmount = calculateMaxSolAmount(solAmount, slippageSettings.slippage);
+      const actualSlippage = getActualSlippage(slippageSettings.slippage);
+      const maxSolAmount = calculateMaxSolAmount(solAmount, actualSlippage);
 
       console.log('[BuyPanel] 买入参数:', {
         mintAddress,
         solAmount,
         slippagePercent: slippageSettings.slippage,
+        actualSlippagePercent: actualSlippage,
         displayTokenAmount,
         buyTokenAmount: buyTokenAmount.toString(),
         maxSolAmount: maxSolAmount.toString(),
