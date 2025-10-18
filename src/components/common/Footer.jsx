@@ -6,7 +6,7 @@ const Footer = () => {
         {/* Social Links */}
         <div className="flex justify-center space-x-4 mb-6">
           <a
-            href="https://t.me/pinpet"
+            href="https://doc.pinpet.fun/#/"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white border-2 border-black rounded-lg p-3 cartoon-shadow-sm hover:bg-blue-100 transition-colors group"
@@ -17,7 +17,7 @@ const Footer = () => {
           </a>
           
           <a
-            href="https://github.com/pinpet"
+            href="https://github.com/pinpetfun"
             target="_blank"
             rel="noopener noreferrer"
             className="bg-white border-2 border-black rounded-lg p-3 cartoon-shadow-sm hover:bg-gray-100 transition-colors group"
