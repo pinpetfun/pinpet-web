@@ -20,7 +20,6 @@ const Header = () => {
         <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/create">Create</a>
         <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/trending">Trending</a>
         <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/resources">Resources</a>
-        <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/debug">Debug</a>
       </nav>
       
       <div className="flex items-center space-x-4">

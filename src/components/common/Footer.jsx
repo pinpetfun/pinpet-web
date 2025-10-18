@@ -64,6 +64,8 @@ const Footer = () => {
               <span className="text-gray-500">|</span>
               <a href="/cookies" className="text-gray-600 hover:text-orange-500 transition-colors font-nunito">Cookies</a>
               <span className="text-gray-500">|</span>
+              <a href="/debug" className="text-xs text-gray-400 hover:text-orange-500 transition-colors font-nunito">Debug</a>
+              <span className="text-gray-500">|</span>
               <span className="text-gray-600 font-nunito">Built on <span className="text-orange-500 font-bold">Solana</span> ⚡</span>
             </div>
           </div>
