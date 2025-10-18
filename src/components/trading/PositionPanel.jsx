@@ -2,15 +2,16 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { AdjustmentsHorizontalIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
 import PositionItem from './PositionItem';
 import { useWalletContext } from '../../contexts/WalletContext';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 import { config, convertIpfsUrl } from '../../config';
 import { calculatePositionProfitPercentage, calculateLongProfitPercentage, calculateShortProfitPercentage, formatProfitPercentage } from '../../utils/profitCalculator';
+import { getEmojiImage } from '../../config/emojiConfig';
 
 const PositionPanel = ({ mintAddress = null }) => {
   // 从 localStorage 读取过滤模式，默认为 "all"
   const getInitialFilterMode = () => {
     try {
-      const saved = localStorage.getItem('spinpet_position_filter_mode');
+      const saved = localStorage.getItem('pinpet_position_filter_mode');
       return saved === 'current' ? 'current' : 'all';
     } catch {
       return 'all';
@@ -25,7 +26,7 @@ const PositionPanel = ({ mintAddress = null }) => {
   
   // 获取钱包地址和 SDK
   const { walletAddress, connected } = useWalletContext();
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
 
   // 转换API数据到UI格式
   const transformApiData = useCallback((apiOrders) => {
@@ -69,7 +70,7 @@ const PositionPanel = ({ mintAddress = null }) => {
         // UI显示字段（保持现有逻辑）
         id: order.order_pda,
         tokenSymbol: order.symbol,
-        tokenImage: convertIpfsUrl(order.image) || 'https://via.placeholder.com/40/CCCCCC/666666?text=?',
+        tokenImage: convertIpfsUrl(order.image) || getEmojiImage('default', 40),
         pair: order.symbol,
         direction: order.order_type === 1 ? 'long' : 'short',
         orderPda: order.order_pda.slice(0, 6),
@@ -118,10 +119,10 @@ const PositionPanel = ({ mintAddress = null }) => {
       setIsLoading(true);
       setError(null);
 
-      const apiUrl = `${config.spinpetApiUrl}/api/user_orders?user=${walletAddress}&page=1&limit=1000&order_by=start_time_desc`;
+      const apiUrl = `${config.pinpetApiUrl}/api/user_orders?user=${walletAddress}&page=1&limit=1000&order_by=start_time_desc`;
       
       console.log('🚨🚨🚨 [PositionPanel] 正在调用的API URL:', apiUrl);
-      console.log('🚨🚨🚨 [PositionPanel] config.spinpetApiUrl:', config.spinpetApiUrl);
+      console.log('🚨🚨🚨 [PositionPanel] config.pinpetApiUrl:', config.pinpetApiUrl);
       console.log('🚨🚨🚨 [PositionPanel] walletAddress:', walletAddress);
       
       const response = await fetch(apiUrl, {
@@ -191,7 +192,7 @@ const PositionPanel = ({ mintAddress = null }) => {
     
     // 保存到 localStorage
     try {
-      localStorage.setItem('spinpet_position_filter_mode', newMode);
+      localStorage.setItem('pinpet_position_filter_mode', newMode);
     } catch (error) {
       console.warn('[PositionPanel] Failed to save filter mode to localStorage:', error);
     }
@@ -239,11 +240,11 @@ const PositionPanel = ({ mintAddress = null }) => {
     <div className="bg-white border-4 border-black rounded-2xl h-fit mt-4">
       {/* 头部区域 */}
       <div className="p-4 border-b-2 border-black flex justify-between items-center">
-        <h2 className="text-lg font-fredoka text-black">Margin Position List</h2>
+        <h2 className="text-lg font-nunito text-black">Margin Position List</h2>
         <div className="flex items-center space-x-4">
           <button 
             onClick={handleFilterToggle}
-            className="text-sm text-gray-600 hover:text-black flex items-center font-fredoka transition-colors"
+            className="text-sm text-gray-600 hover:text-black flex items-center font-nunito transition-colors"
           >
             <AdjustmentsHorizontalIcon className="h-5 w-5 mr-1" />
             {filterMode === 'all' ? 'Show One' : 'Show All'}
@@ -251,7 +252,7 @@ const PositionPanel = ({ mintAddress = null }) => {
           <button 
             onClick={handleRefresh}
             disabled={isRefreshing}
-            className="text-sm text-gray-600 hover:text-black flex items-center font-fredoka transition-colors disabled:opacity-50"
+            className="text-sm text-gray-600 hover:text-black flex items-center font-nunito transition-colors disabled:opacity-50"
           >
             <ArrowPathIcon className={`h-5 w-5 mr-1 ${isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
@@ -264,16 +265,16 @@ const PositionPanel = ({ mintAddress = null }) => {
         {isLoading && positions.length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             <div className="text-2xl mb-2">⏳</div>
-            <div className="font-fredoka text-lg">Loading Positions...</div>
+            <div className="font-nunito text-lg">Loading Positions...</div>
           </div>
         ) : error ? (
           <div className="text-center py-8 text-red-500">
             <div className="text-2xl mb-2">❌</div>
-            <div className="font-fredoka text-lg">Failed to Load</div>
+            <div className="font-nunito text-lg">Failed to Load</div>
             <div className="text-sm mt-1">{error}</div>
             <button 
               onClick={handleRefresh}
-              className="mt-2 px-4 py-2 bg-red-500 text-white rounded font-fredoka text-sm hover:bg-red-600"
+              className="mt-2 px-4 py-2 bg-red-500 text-white rounded font-nunito text-sm hover:bg-red-600"
             >
               Retry
             </button>
@@ -281,13 +282,13 @@ const PositionPanel = ({ mintAddress = null }) => {
         ) : !connected ? (
           <div className="text-center py-8 text-gray-500">
             <div className="text-3xl mb-2">🔌</div>
-            <div className="font-fredoka text-lg">Connect Wallet</div>
+            <div className="font-nunito text-lg">Connect Wallet</div>
             <div className="text-sm mt-1">Please connect your wallet to view positions</div>
           </div>
         ) : displayedPositions.length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             <div className="text-3xl mb-2">📊</div>
-            <div className="font-fredoka text-lg">No Positions</div>
+            <div className="font-nunito text-lg">No Positions</div>
             <div className="text-sm mt-1">Start your first trade in the trading panel!</div>
           </div>
         ) : (
@@ -307,7 +308,7 @@ const PositionPanel = ({ mintAddress = null }) => {
       {/* 过滤状态提示 */}
       {filterMode === 'current' && mintAddress && (
         <div className="p-2 bg-blue-50 border-t-2 border-black text-center">
-          <div className="text-xs text-blue-600 font-fredoka">
+          <div className="text-xs text-blue-600 font-nunito">
             Showing positions for current token only
           </div>
         </div>

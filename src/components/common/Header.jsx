@@ -7,20 +7,20 @@ const Header = () => {
   return (
     <header className="bg-amber-100 py-4 px-8 flex justify-between items-center border-b-4 border-black">
       <div className="flex items-center space-x-2">
-        <img 
-          alt="SpinPet logo" 
-          className="w-12 h-12" 
-          src="https://via.placeholder.com/48x48/FFA500/FFFFFF?text=SP"
+        <img
+          alt="PinPet logo"
+          className="w-12 h-12"
+          src="/favicon.svg"
         />
-        <span className="text-3xl font-fredoka text-orange-500">SpinPet</span>
+        <span className="text-3xl font-extrabold font-nunito text-orange-500">PinPet</span>
       </div>
       
-      <nav className="hidden md:flex items-center space-x-6 font-fredoka text-lg">
-        <a className="text-gray-700 hover:text-orange-500 transition-colors" href="/">Home</a>
-        <a className="text-gray-700 hover:text-orange-500 transition-colors" href="/create">Create</a>
-        <a className="text-gray-700 hover:text-orange-500 transition-colors" href="/trending">Trending</a>
-        <a className="text-gray-700 hover:text-orange-500 transition-colors" href="/resources">Resources</a>
-        <a className="text-gray-700 hover:text-orange-500 transition-colors" href="/debug">Debug</a>
+      <nav className="hidden md:flex items-center space-x-6 font-nunito text-lg">
+        <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/">Home</a>
+        <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/create">Create</a>
+        <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/trending">Trending</a>
+        <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/resources">Resources</a>
+        <a className="text-gray-700 hover:text-orange-500 transition-colors font-semibold" href="/debug">Debug</a>
       </nav>
       
       <div className="flex items-center space-x-4">
@@ -36,7 +36,7 @@ const Header = () => {
                 <button
                   className={`${
                     active ? 'bg-yellow-400' : ''
-                  } w-full text-left px-4 py-2 font-fredoka text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-yellow-400 transition-colors`}
+                  } w-full text-left px-4 py-2 font-nunito text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-yellow-400 transition-colors`}
                 >
                   English
                 </button>
@@ -47,7 +47,7 @@ const Header = () => {
                 <button
                   className={`${
                     active ? 'bg-yellow-400' : ''
-                  } w-full text-left px-4 py-2 font-fredoka text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-yellow-400 transition-colors`}
+                  } w-full text-left px-4 py-2 font-nunito text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-yellow-400 transition-colors`}
                 >
                   中文
                 </button>
@@ -58,7 +58,7 @@ const Header = () => {
                 <button
                   className={`${
                     active ? 'bg-yellow-400' : ''
-                  } w-full text-left px-4 py-2 font-fredoka text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-yellow-400 transition-colors`}
+                  } w-full text-left px-4 py-2 font-nunito text-sm first:rounded-t-lg last:rounded-b-lg hover:bg-yellow-400 transition-colors`}
                 >
                   Español
                 </button>

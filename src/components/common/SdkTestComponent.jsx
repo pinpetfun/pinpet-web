@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
-import { useSpinPetData } from '../../hooks/useSpinPetData';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
+import { usePinPetData } from '../../hooks/usePinPetData';
 
 const SdkTestComponent = () => {
   const { 
@@ -14,15 +14,15 @@ const SdkTestComponent = () => {
     connected, 
     walletAddress,
     config 
-  } = useSpinPetSdk();
+  } = usePinPetSdk();
 
-  const { 
-    getMints, 
-    getMintInfo, 
-    getPrice, 
-    loading: dataLoading, 
-    error: dataError 
-  } = useSpinPetData();
+  const {
+    getMints,
+    getMintInfo,
+    getPrice,
+    loading: dataLoading,
+    error: dataError
+  } = usePinPetData();
 
   const [testResults, setTestResults] = useState({});
   const [testing, setTesting] = useState(false);
@@ -135,7 +135,7 @@ const SdkTestComponent = () => {
 
   return (
     <div className="p-6 bg-gray-50 rounded-lg border-2 border-gray-200 max-w-4xl mx-auto mt-8">
-      <h2 className="text-2xl font-fredoka mb-6 text-gray-900">SpinPet SDK 测试面板</h2>
+      <h2 className="text-2xl font-nunito mb-6 text-gray-900">PinPet SDK 测试面板</h2>
       
       {/* SDK 状态部分 */}
       <div className="mb-6">

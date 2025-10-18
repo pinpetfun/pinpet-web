@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { calculateTokensFromSOL, formatDisplayNumber, getPriceDebugInfo } from '../../utils/priceCalculator';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
@@ -28,7 +28,7 @@ const BuyPanel = React.memo(({
   const [isOptimizing, setIsOptimizing] = useState(false);
   
   // SDK 和钱包 hooks
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   const { walletAddress, connected } = useWalletContext();
   const { signTransaction } = useWallet();
   
@@ -441,7 +441,7 @@ const BuyPanel = React.memo(({
     <div className="space-y-4">
 
       {/* Balance Display */}
-      <div className="text-gray-700 font-fredoka">
+      <div className="text-gray-700 font-nunito">
         balance: <span className="font-bold">{solBalance} SOL</span>
       </div>
 
@@ -455,7 +455,7 @@ const BuyPanel = React.memo(({
           placeholder="0"
         />
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
-          <span className="text-black font-fredoka">SOL</span>
+          <span className="text-black font-nunito">SOL</span>
           <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center">
             <div className="w-4 h-4 bg-purple-300 rounded-full"></div>
           </div>
@@ -471,31 +471,31 @@ const BuyPanel = React.memo(({
       <div className="flex space-x-2">
         <button
           onClick={() => handleQuickAmount('reset')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           Reset
         </button>
         <button
           onClick={() => handleQuickAmount('0.1')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           0.1 SOL
         </button>
         <button
           onClick={() => handleQuickAmount('0.5')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           0.5 SOL
         </button>
         <button
           onClick={() => handleQuickAmount('1')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           1 SOL
         </button>
         <button
           onClick={() => handleQuickAmount('max')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           Max
         </button>
@@ -503,13 +503,13 @@ const BuyPanel = React.memo(({
 
       {/* Insufficient Balance Warning */}
       {hasInsufficientBalance && (
-        <div className="text-red-500 text-sm font-fredoka">
+        <div className="text-red-500 text-sm font-nunito">
           Insufficient balance: you have {solBalance} SOL
         </div>
       )}
 
       {/* Calculated Result */}
-      <div className="text-gray-700 font-fredoka text-lg">
+      <div className="text-gray-700 font-nunito text-lg">
         {getDisplayTokenAmount()} {tokenSymbol}
       </div>
 
@@ -527,7 +527,7 @@ const BuyPanel = React.memo(({
           !mintAddress ||
           isProcessing
         }
-        className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-fredoka font-bold border-2 border-black cartoon-shadow trading-button"
+        className="w-full bg-green-500 hover:bg-green-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-nunito font-bold border-2 border-black cartoon-shadow trading-button"
       >
         {isProcessing 
           ? `Buying ${tokenSymbol}...` 

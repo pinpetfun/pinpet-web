@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @layer base {
   body {
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nunito', sans-serif;
     background-color: #FFFBEB;
     color: black;
     -webkit-font-smoothing: antialiased;
@@ -13,20 +13,20 @@
 }
 
 @layer utilities {
-  .font-fredoka {
-    font-family: 'Fredoka One', cursive;
+  .font-nunito {
+    font-family: 'Nunito', sans-serif;
   }
-  
+
   .shadow-cartoon {
     box-shadow: 5px 5px 0px 0px rgba(0,0,0,1);
   }
-  
+
   .shadow-cartoon-sm {
     box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
   }
-  
+
   .btn-cartoon {
-    font-family: 'Fredoka One', cursive;
+    font-family: 'Nunito', sans-serif;
     @apply text-black bg-yellow-400 border-2 border-black rounded-lg px-4 py-2 hover:bg-yellow-500 transition-all duration-200;
     box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
   }

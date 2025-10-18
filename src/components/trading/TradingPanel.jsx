@@ -162,7 +162,7 @@ const TradingPanel = React.memo(({
         <div className="flex">
           <button 
             onClick={() => setActiveMode('buy')}
-            className={`flex-1 py-3 text-lg font-fredoka border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-left ${
+            className={`flex-1 py-3 text-lg font-nunito border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-left ${
               activeMode === 'buy' 
                 ? 'bg-green-500 text-white' 
                 : 'bg-green-200 text-black hover:bg-green-300'
@@ -172,7 +172,7 @@ const TradingPanel = React.memo(({
           </button>
           <button 
             onClick={() => setActiveMode('long')}
-            className={`flex-1 py-3 text-lg font-fredoka border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-right ${
+            className={`flex-1 py-3 text-lg font-nunito border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-right ${
               activeMode === 'long' 
                 ? 'bg-green-500 text-white' 
                 : 'bg-green-200 text-black hover:bg-green-300'
@@ -186,7 +186,7 @@ const TradingPanel = React.memo(({
         <div className="flex">
           <button 
             onClick={() => setActiveMode('sell')}
-            className={`flex-1 py-3 text-lg font-fredoka border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-left ${
+            className={`flex-1 py-3 text-lg font-nunito border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-left ${
               activeMode === 'sell' 
                 ? 'bg-red-500 text-white' 
                 : 'bg-red-200 text-black hover:bg-red-300'
@@ -196,7 +196,7 @@ const TradingPanel = React.memo(({
           </button>
           <button 
             onClick={() => setActiveMode('short')}
-            className={`flex-1 py-3 text-lg font-fredoka border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-right ${
+            className={`flex-1 py-3 text-lg font-nunito border-2 border-black cartoon-shadow trading-button rounded-lg btn-group-right ${
               activeMode === 'short' 
                 ? 'bg-red-500 text-white' 
                 : 'bg-red-200 text-black hover:bg-red-300'
@@ -238,12 +238,12 @@ const TradingPanel = React.memo(({
 
       {/* Switch to Token and Set Max Slippage Buttons */}
       <div className="flex justify-between items-center mb-4">
-        <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs font-fredoka border border-gray-400 hover:bg-gray-300 transition-colors">
+        <button className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-xs font-nunito border border-gray-400 hover:bg-gray-300 transition-colors">
           Switch to {dynamicTokenSymbol}
         </button>
         <button 
           onClick={() => setShowSlippageModal(true)}
-          className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-fredoka hover:bg-gray-300 border border-gray-400 transition-colors"
+          className="bg-gray-200 text-gray-700 px-3 py-1 rounded text-sm font-nunito hover:bg-gray-300 border border-gray-400 transition-colors"
         >
           Set max slippage ({slippageSettings.slippage}%)
         </button>

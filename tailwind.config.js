@@ -7,8 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        'fredoka': ['Fredoka One', 'cursive'],
-        'inter': ['Inter', 'sans-serif'],
+        'nunito': ['Nunito', 'sans-serif'],
       },
       boxShadow: {
         'cartoon': '5px 5px 0px 0px rgba(0,0,0,1)',

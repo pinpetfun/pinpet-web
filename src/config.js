@@ -2,7 +2,7 @@
 export const config = {
   serverUrl: import.meta.env.VITE_SERVER_URL,
   gatewayUrl: import.meta.env.VITE_GATEWAY_URL,
-  spinpetApiUrl: import.meta.env.VITE_SPINPET_API_URL,
+  pinpetApiUrl: import.meta.env.VITE_PINPET_API_URL,
   tradeQuoteWs: import.meta.env.VITE_TRADE_QUOTE_WS,
   defaultDataSource: import.meta.env.VITE_DEFAULT_DATA_SOURCE || 'fast',
   isDev: import.meta.env.DEV,
@@ -24,8 +24,8 @@ if (!config.gatewayUrl) {
   throw new Error('VITE_GATEWAY_URL is required')
 }
 
-if (!config.spinpetApiUrl) {
-  throw new Error('VITE_SPINPET_API_URL is required')
+if (!config.pinpetApiUrl) {
+  throw new Error('VITE_PINPET_API_URL is required')
 }
 
 // 生成交易浏览器链接的工具函数

@@ -5,9 +5,9 @@ const Footer = () => {
       <div className="px-8 py-8">
         {/* Social Links */}
         <div className="flex justify-center space-x-4 mb-6">
-          <a 
-            href="https://t.me/spinpet" 
-            target="_blank" 
+          <a
+            href="https://t.me/pinpet"
+            target="_blank"
             rel="noopener noreferrer"
             className="bg-white border-2 border-black rounded-lg p-3 cartoon-shadow-sm hover:bg-blue-100 transition-colors group"
           >
@@ -16,9 +16,9 @@ const Footer = () => {
             </svg>
           </a>
           
-          <a 
-            href="https://github.com/spinpet" 
-            target="_blank" 
+          <a
+            href="https://github.com/pinpet"
+            target="_blank"
             rel="noopener noreferrer"
             className="bg-white border-2 border-black rounded-lg p-3 cartoon-shadow-sm hover:bg-gray-100 transition-colors group"
           >
@@ -27,9 +27,9 @@ const Footer = () => {
             </svg>
           </a>
           
-          <a 
-            href="https://twitter.com/spinpet" 
-            target="_blank" 
+          <a
+            href="https://twitter.com/pinpet"
+            target="_blank"
             rel="noopener noreferrer"
             className="bg-white border-2 border-black rounded-lg p-3 cartoon-shadow-sm hover:bg-blue-50 transition-colors group"
           >
@@ -38,9 +38,9 @@ const Footer = () => {
             </svg>
           </a>
           
-          <a 
-            href="https://discord.gg/spinpet" 
-            target="_blank" 
+          <a
+            href="https://discord.gg/pinpet"
+            target="_blank"
             rel="noopener noreferrer"
             className="bg-white border-2 border-black rounded-lg p-3 cartoon-shadow-sm hover:bg-purple-50 transition-colors group"
           >
@@ -54,17 +54,17 @@ const Footer = () => {
         <div className="border-t-2 border-black pt-4">
           <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
             <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-4 mb-4 md:mb-0">
-              <span className="text-gray-600 font-fredoka">© 2025 SpinPet. All rights reserved.</span>
+              <span className="text-gray-600 font-nunito">© 2025 PinPet. All rights reserved.</span>
               <span className="hidden md:inline text-gray-500">|</span>
-              <span className="text-gray-600 font-fredoka">Made with ❤️ for pet lovers</span>
+              <span className="text-gray-600 font-nunito">Made with ❤️ for pet lovers</span>
             </div>
             
             <div className="flex items-center space-x-4">
-              <a href="/privacy" className="text-gray-600 hover:text-orange-500 transition-colors font-fredoka">Privacy</a>
+              <a href="/privacy" className="text-gray-600 hover:text-orange-500 transition-colors font-nunito">Privacy</a>
               <span className="text-gray-500">|</span>
-              <a href="/cookies" className="text-gray-600 hover:text-orange-500 transition-colors font-fredoka">Cookies</a>
+              <a href="/cookies" className="text-gray-600 hover:text-orange-500 transition-colors font-nunito">Cookies</a>
               <span className="text-gray-500">|</span>
-              <span className="text-gray-600 font-fredoka">Built on <span className="text-orange-500 font-bold">Solana</span> ⚡</span>
+              <span className="text-gray-600 font-nunito">Built on <span className="text-orange-500 font-bold">Solana</span> ⚡</span>
             </div>
           </div>
         </div>

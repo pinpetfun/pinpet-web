@@ -15,7 +15,7 @@ const TradeCenterPage = () => {
       {/* Warning Banner */}
       {/* <div className="bg-yellow-200 border-2 border-yellow-500 text-yellow-800 px-4 py-2 mx-4 mt-4 rounded-lg flex items-center text-base cartoon-shadow">
         <LightBulbIcon className="h-5 w-5 mr-2 animate-pulse" />
-        <span className="font-fredoka">
+        <span className="font-nunito">
           Exploring risky? Try <a className="font-bold underline hover:text-yellow-700" href="#">LaunchLabs &gt;</a>
         </span>
       </div> */}

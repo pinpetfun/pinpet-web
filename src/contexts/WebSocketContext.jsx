@@ -27,7 +27,7 @@ export const WebSocketProvider = ({ children }) => {
       return socketRef.current;
     }
 
-    const WEBSOCKET_URL = config.tradeQuoteWs || 'https://devtestapi.spin.pet';
+    const WEBSOCKET_URL = config.tradeQuoteWs || 'https://devtestapi.pinpet.fun';
     const WS_BASE_URL = WEBSOCKET_URL.endsWith('/kline') ? WEBSOCKET_URL.replace('/kline', '') : WEBSOCKET_URL;
     const NAMESPACE = '/kline';
     

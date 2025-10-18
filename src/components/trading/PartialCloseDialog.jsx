@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Decimal from 'decimal.js';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast } from '../common';
+import { getEmojiImage } from '../../config/emojiConfig';
 
 const PartialCloseDialog = ({ isOpen, onClose, position, onConfirmPartialClose, onRefresh }) => {
   // SDK 和钱包 hooks
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   const { walletAddress, connected } = useWalletContext();
   const { signTransaction } = useWallet();
 
@@ -404,7 +405,7 @@ const PartialCloseDialog = ({ isOpen, onClose, position, onConfirmPartialClose, 
         </button>
 
         {/* 标题 */}
-        <h2 className="text-xl font-fredoka text-black text-center mb-4">
+        <h2 className="text-xl font-nunito text-black text-center mb-4">
           Close {direction === 'long' ? 'Long' : 'Short'} Position
         </h2>
 
@@ -456,12 +457,12 @@ const PartialCloseDialog = ({ isOpen, onClose, position, onConfirmPartialClose, 
           />
           <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
             <span className="text-black font-semibold mr-2">{pair}</span>
-            <img 
+            <img
               alt={`${pair} token logo`}
               className="w-6 h-6 rounded-full"
               src={tokenImage}
               onError={(e) => {
-                e.target.src = 'https://via.placeholder.com/24/CCCCCC/666666?text=?';
+                e.target.src = getEmojiImage('default', 24);
               }}
             />
           </div>
@@ -478,7 +479,7 @@ const PartialCloseDialog = ({ isOpen, onClose, position, onConfirmPartialClose, 
             <button 
               key={btn}
               onClick={() => handlePercentageClick(btn)}
-              className="flex-1 py-2 text-sm bg-gray-200 text-black rounded-md hover:bg-gray-300 transition-all duration-200 font-fredoka"
+              className="flex-1 py-2 text-sm bg-gray-200 text-black rounded-md hover:bg-gray-300 transition-all duration-200 font-nunito"
             >
               {btn}
             </button>
@@ -494,7 +495,7 @@ const PartialCloseDialog = ({ isOpen, onClose, position, onConfirmPartialClose, 
         <button 
           onClick={handleConfirmClose}
           disabled={isProcessing || !connected || !isReady}
-          className="w-full bg-red-500 text-white font-fredoka font-bold py-3 rounded-md hover:bg-red-600 disabled:bg-gray-500 disabled:cursor-not-allowed transition-all duration-200 text-lg shadow-cartoon-sm active:scale-95"
+          className="w-full bg-red-500 text-white font-nunito font-bold py-3 rounded-md hover:bg-red-600 disabled:bg-gray-500 disabled:cursor-not-allowed transition-all duration-200 text-lg shadow-cartoon-sm active:scale-95"
         >
           {isProcessing ? 'Closing...' : 'Close'}
         </button>

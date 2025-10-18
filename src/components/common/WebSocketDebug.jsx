@@ -71,7 +71,7 @@ const WebSocketDebug = () => {
 
   return (
     <div className="fixed top-4 right-4 bg-white border-2 border-black rounded-lg p-4 cartoon-shadow z-50 text-xs font-mono">
-      <h3 className="font-fredoka font-bold mb-2">WebSocket Debug</h3>
+      <h3 className="font-nunito font-bold mb-2">WebSocket Debug</h3>
       <div className="space-y-1">
         <div>状态: <span className={`font-bold ${connectionStatus === 'connected' ? 'text-green-600' : 'text-red-600'}`}>
           {connectionStatus}

@@ -1,27 +1,29 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Button } from '@headlessui/react';
 import { Keypair, PublicKey } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useNavigate } from 'react-router-dom';
 import { uploadToIPFS, validateFile, uploadJSONToIPFS } from '../../services/pinataService.js';
 import { useWalletContext } from '../../contexts/WalletContext.jsx';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext.jsx';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext.jsx';
 import { generateTxExplorerUrl } from '../../config.js';
-import { 
-  ChevronDownIcon, 
-  LinkIcon, 
+import {
+  ChevronDownIcon,
+  LinkIcon,
   FolderIcon,
   RectangleStackIcon,
   InformationCircleIcon,
   CheckCircleIcon,
-  XCircleIcon 
+  XCircleIcon
 } from '@heroicons/react/24/outline';
 
 const CreatePage = () => {
   // 钱包和 SDK 状态
   const { signTransaction } = useWallet();
   const { walletAddress, connected } = useWalletContext();
-  const { sdk, isReady, getConnection } = useSpinPetSdk();
-  
+  const { sdk, isReady, getConnection } = usePinPetSdk();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     coinName: '',
     ticker: '',
@@ -34,20 +36,21 @@ const CreatePage = () => {
 
   const [showSocialLinks, setShowSocialLinks] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
-  
+
   // IPFS 相关状态
   const [uploadStatus, setUploadStatus] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [ipfsData, setIpfsData] = useState(null); // 存储 CID, IPFS URL, Gateway URL
   const [dragActive, setDragActive] = useState(false);
   const [uri, setUri] = useState(''); // 存储 JSON metadata 的 IPFS URI
-  
+
   // 代币创建相关状态
   const [tokenCreationStatus, setTokenCreationStatus] = useState('idle'); // idle, creating, success, error
   const [transactionHash, setTransactionHash] = useState('');
   const [createdTokenInfo, setCreatedTokenInfo] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-  
+  const [countdown, setCountdown] = useState(3); // 跳转倒计时
+
   const fileInputRef = useRef(null);
 
   const handleInputChange = (field, value) => {
@@ -55,6 +58,36 @@ const CreatePage = () => {
       ...prev,
       [field]: value
     }));
+  };
+
+  // 处理创建成功后的倒计时和自动跳转
+  useEffect(() => {
+    let timer;
+    if (tokenCreationStatus === 'success' && createdTokenInfo) {
+      // 每秒更新倒计时
+      timer = setInterval(() => {
+        setCountdown((prev) => {
+          if (prev <= 1) {
+            // 倒计时结束，跳转到币详情页
+            navigate(`/coin/${createdTokenInfo.mintAddress}`);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
+    }
+
+    // 清理定时器
+    return () => {
+      if (timer) clearInterval(timer);
+    };
+  }, [tokenCreationStatus, createdTokenInfo, navigate]);
+
+  // 立即跳转到币详情页
+  const handleNavigateToCoin = () => {
+    if (createdTokenInfo) {
+      navigate(`/coin/${createdTokenInfo.mintAddress}`);
+    }
   };
 
   // 组合表单数据为指定格式的 JSON
@@ -68,7 +101,7 @@ const CreatePage = () => {
       description: formData.description,
       image: imageUrl,
       showName: true,
-      createdOn: "https://spin.pet",
+      createdOn: "https://pinpet.fun",
       twitter: formData.twitter || "https://x.com/elonmusk/status/1966417879118876756",
       website: formData.website || "",
       telegram: formData.telegram || ""
@@ -238,6 +271,7 @@ const CreatePage = () => {
         signature: signature
       });
       setUploadStatus('Token created successfully!');
+      setCountdown(3); // 重置倒计时
       
       console.log('=== Token Creation Success ===');
       console.log('Mint Address:', mintKeypair.publicKey.toString());
@@ -316,19 +350,19 @@ const CreatePage = () => {
       <div className="max-w-3xl mx-auto px-8">
         <div className="space-y-8">
           <div className="text-center">
-            <h1 className="text-4xl font-fredoka text-gray-900 mb-2">Create new coin</h1>
+            <h1 className="text-4xl font-nunito text-gray-900 mb-2">Create new coin</h1>
           </div>
 
           {/* Coin Details Section */}
           <div className="bg-white border-4 border-black rounded-2xl p-6 cartoon-shadow">
-              <h2 className="text-2xl font-fredoka text-gray-900 mb-2">Coin details</h2>
-              <p className="text-gray-600 font-fredoka mb-6">Choose carefully, these can't be changed once the coin is created</p>
+              <h2 className="text-2xl font-nunito text-gray-900 mb-2">Coin details</h2>
+              <p className="text-gray-600 font-nunito mb-6">Choose carefully, these can't be changed once the coin is created</p>
 
               <div className="space-y-6">
                 {/* Coin Name and Ticker */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-fredoka text-gray-700 mb-2">
+                    <label className="block text-sm font-nunito text-gray-700 mb-2">
                       Coin name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -338,7 +372,7 @@ const CreatePage = () => {
                       onChange={(e) => handleInputChange('coinName', e.target.value)}
                       maxLength={32}
                       required
-                      className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-fredoka bg-gray-50"
+                      className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-nunito bg-gray-50"
                     />
                     <div className="flex justify-between mt-1">
                       <span className="text-xs text-gray-500">Required</span>
@@ -346,7 +380,7 @@ const CreatePage = () => {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-fredoka text-gray-700 mb-2">
+                    <label className="block text-sm font-nunito text-gray-700 mb-2">
                       Ticker <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -356,7 +390,7 @@ const CreatePage = () => {
                       onChange={(e) => handleInputChange('ticker', e.target.value)}
                       maxLength={10}
                       required
-                      className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-fredoka bg-gray-50"
+                      className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-nunito bg-gray-50"
                     />
                     <div className="flex justify-between mt-1">
                       <span className="text-xs text-gray-500">Required</span>
@@ -367,7 +401,7 @@ const CreatePage = () => {
 
                 {/* Description */}
                 <div>
-                  <label className="block text-sm font-fredoka text-gray-700 mb-2">
+                  <label className="block text-sm font-nunito text-gray-700 mb-2">
                     Description <span className="text-gray-500">(Optional)</span>
                   </label>
                   <textarea
@@ -376,7 +410,7 @@ const CreatePage = () => {
                     onChange={(e) => handleInputChange('description', e.target.value)}
                     maxLength={5000}
                     rows={4}
-                    className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-fredoka bg-gray-50 resize-none"
+                    className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-nunito bg-gray-50 resize-none"
                   />
                   <div className="flex justify-end mt-1">
                     <span className="text-xs text-gray-500">{formData.description.length}/5000</span>
@@ -387,7 +421,7 @@ const CreatePage = () => {
                 <div>
                   <Button
                     onClick={() => setShowSocialLinks(!showSocialLinks)}
-                    className="flex items-center text-gray-700 hover:text-orange-500 font-fredoka transition-colors"
+                    className="flex items-center text-gray-700 hover:text-orange-500 font-nunito transition-colors"
                   >
                     <LinkIcon className="h-4 w-4 mr-2" />
                     Add social links <span className="text-gray-500 ml-1">(Optional)</span>
@@ -398,34 +432,34 @@ const CreatePage = () => {
                     <div className="mt-4 space-y-4 pl-6 border-l-2 border-gray-200">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-sm font-fredoka text-gray-700 mb-2">Website</label>
+                          <label className="block text-sm font-nunito text-gray-700 mb-2">Website</label>
                           <input
                             type="url"
                             placeholder="Add URL"
                             value={formData.website}
                             onChange={(e) => handleInputChange('website', e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-fredoka bg-gray-50"
+                            className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-nunito bg-gray-50"
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-fredoka text-gray-700 mb-2">X</label>
+                          <label className="block text-sm font-nunito text-gray-700 mb-2">X</label>
                           <input
                             type="url"
                             placeholder="Add URL"
                             value={formData.twitter}
                             onChange={(e) => handleInputChange('twitter', e.target.value)}
-                            className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-fredoka bg-gray-50"
+                            className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-nunito bg-gray-50"
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-fredoka text-gray-700 mb-2">Telegram</label>
+                        <label className="block text-sm font-nunito text-gray-700 mb-2">Telegram</label>
                         <input
                           type="url"
                           placeholder="Add URL"
                           value={formData.telegram}
                           onChange={(e) => handleInputChange('telegram', e.target.value)}
-                          className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-fredoka bg-gray-50"
+                          className="w-full px-4 py-3 border-2 border-black rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 font-nunito bg-gray-50"
                         />
                       </div>
                     </div>
@@ -460,13 +494,13 @@ const CreatePage = () => {
                     <svg className="w-16 h-16 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
                     </svg>
-                    <p className="text-gray-500 font-fredoka text-sm">Upload Image</p>
+                    <p className="text-gray-500 font-nunito text-sm">Upload Image</p>
                   </div>
                 )}
                 
                 {/* Upload Status Display */}
                 {uploadStatus && (
-                  <div className={`mb-4 p-3 rounded-lg text-sm font-fredoka ${
+                  <div className={`mb-4 p-3 rounded-lg text-sm font-nunito ${
                     uploadStatus.includes('successful') 
                       ? 'bg-green-100 text-green-700 border border-green-300'
                       : uploadStatus.includes('Error') || uploadStatus.includes('failed')
@@ -480,7 +514,7 @@ const CreatePage = () => {
                 {/* IPFS Information Display */}
                 {ipfsData && (
                   <div className="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg text-left">
-                    <h4 className="font-fredoka font-bold text-gray-800 mb-2">IPFS Information:</h4>
+                    <h4 className="font-nunito font-bold text-gray-800 mb-2">IPFS Information:</h4>
                     <div className="space-y-2 text-sm">
                       <div>
                         <span className="font-medium text-gray-600">CID:</span>
@@ -518,14 +552,14 @@ const CreatePage = () => {
                   <label htmlFor="image-upload">
                     <Button 
                       as="span" 
-                      className="btn-cartoon bg-orange-500 hover:bg-orange-600 text-white cursor-pointer px-6 py-2 font-fredoka inline-block"
+                      className="btn-cartoon bg-orange-500 hover:bg-orange-600 text-white cursor-pointer px-6 py-2 font-nunito inline-block"
                       disabled={isUploading}
                     >
                       {isUploading ? 'Uploading...' : 'Choose File'}
                     </Button>
                   </label>
                   
-                  <p className="text-sm text-gray-600 font-fredoka text-center">
+                  <p className="text-sm text-gray-600 font-nunito text-center">
                     or drag and drop an image here
                   </p>
                 </div>
@@ -535,7 +569,7 @@ const CreatePage = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <FolderIcon className="h-5 w-5 text-gray-500 mr-2" />
-                    <span className="font-fredoka text-gray-700">File size and type</span>
+                    <span className="font-nunito text-gray-700">File size and type</span>
                   </div>
                   <ul className="text-sm text-gray-600 space-y-1">
                     <li>• Image - max 15mb: '.jpg', '.gif' or '.png' recommended</li>
@@ -545,7 +579,7 @@ const CreatePage = () => {
                 <div>
                   <div className="flex items-center mb-2">
                     <RectangleStackIcon className="h-5 w-5 text-gray-500 mr-2" />
-                    <span className="font-fredoka text-gray-700">Resolution and aspect ratio</span>
+                    <span className="font-nunito text-gray-700">Resolution and aspect ratio</span>
                   </div>
                   <ul className="text-sm text-gray-600 space-y-1">
                     <li>• Image - min. 1000x1000px, 1:1 square recommended</li>
@@ -560,7 +594,7 @@ const CreatePage = () => {
             <div className="bg-yellow-100 border-2 border-yellow-400 rounded-lg p-4">
               <div className="flex items-start">
                 <InformationCircleIcon className="h-5 w-5 text-yellow-600 mr-2" />
-                <p className="text-sm text-gray-700 font-fredoka">
+                <p className="text-sm text-gray-700 font-nunito">
                   Coin data (social links, etc) can only be added now, and can't be changed or edited after creation
                 </p>
               </div>
@@ -570,10 +604,10 @@ const CreatePage = () => {
           {tokenCreationStatus === 'success' && createdTokenInfo && (
             <div className="bg-green-100 border-2 border-green-400 rounded-lg p-6">
               <div className="flex items-start">
-                <CheckCircleIcon className="h-8 w-8 text-green-600 mr-3" />
+                <CheckCircleIcon className="h-8 w-8 text-green-600 mr-3 flex-shrink-0" />
                 <div className="flex-1">
-                  <h3 className="text-lg font-fredoka text-green-800 mb-2">🎉 Token Created Successfully!</h3>
-                  <div className="space-y-2 text-sm">
+                  <h3 className="text-lg font-nunito text-green-800 mb-2">🎉 Token Created Successfully!</h3>
+                  <div className="space-y-2 text-sm mb-4">
                     <div>
                       <span className="font-medium text-green-700">Token Name:</span>
                       <span className="ml-2">{createdTokenInfo.name} ({createdTokenInfo.symbol})</span>
@@ -584,15 +618,28 @@ const CreatePage = () => {
                     </div>
                     <div>
                       <span className="font-medium text-green-700">Transaction:</span>
-                      <a 
+                      <a
                         href={generateTxExplorerUrl(createdTokenInfo.signature)}
-                        target="_blank" 
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="ml-2 text-green-600 hover:text-green-800 underline text-xs break-all"
                       >
                         {createdTokenInfo.signature}
                       </a>
                     </div>
+                  </div>
+
+                  {/* Jump button and countdown */}
+                  <div className="flex items-center gap-4 mt-4 pt-4 border-t border-green-300">
+                    <Button
+                      onClick={handleNavigateToCoin}
+                      className="btn-cartoon bg-green-500 hover:bg-green-600 text-white px-6 py-2 font-nunito"
+                    >
+                      View Token Details →
+                    </Button>
+                    <span className="text-sm text-green-700 font-nunito">
+                      Redirecting in {countdown}s...
+                    </span>
                   </div>
                 </div>
               </div>
@@ -605,7 +652,7 @@ const CreatePage = () => {
               <div className="flex items-start">
                 <XCircleIcon className="h-5 w-5 text-red-600 mr-2" />
                 <div>
-                  <h3 className="text-lg font-fredoka text-red-800 mb-1">Token Creation Failed</h3>
+                  <h3 className="text-lg font-nunito text-red-800 mb-1">Token Creation Failed</h3>
                   <p className="text-sm text-red-700">{errorMessage}</p>
                 </div>
               </div>

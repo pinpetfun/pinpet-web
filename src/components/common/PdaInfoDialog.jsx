@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 
 const PdaInfoDialog = ({ isOpen, onClose, title, pdaType, pdaAddress }) => {
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   const [pdaData, setPdaData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -142,7 +142,7 @@ const PdaInfoDialog = ({ isOpen, onClose, title, pdaType, pdaAddress }) => {
       <div className="bg-white rounded-lg shadow-cartoon w-full max-w-2xl mx-4 max-h-[80vh] flex flex-col">
         {/* Header */}
         <div className="flex justify-between items-center p-4 border-b-2 border-gray-200">
-          <h2 className="text-xl font-fredoka text-black font-bold">{title}</h2>
+          <h2 className="text-xl font-nunito text-black font-bold">{title}</h2>
           <button 
             onClick={handleClose}
             className="text-gray-500 hover:text-gray-700 text-xl font-bold leading-none"
@@ -166,7 +166,7 @@ const PdaInfoDialog = ({ isOpen, onClose, title, pdaType, pdaAddress }) => {
             {isLoading ? (
               <div className="text-center py-8 text-gray-400">
                 <div className="text-2xl mb-2">⏳</div>
-                <div className="font-fredoka text-lg">Loading...</div>
+                <div className="font-nunito text-lg">Loading...</div>
               </div>
             ) : pdaData ? (
               <pre 
@@ -178,7 +178,7 @@ const PdaInfoDialog = ({ isOpen, onClose, title, pdaType, pdaAddress }) => {
             ) : (
               <div className="text-center py-8 text-gray-400">
                 <div className="text-2xl mb-2">📭</div>
-                <div className="font-fredoka text-lg">No Data Available</div>
+                <div className="font-nunito text-lg">No Data Available</div>
                 <div className="text-sm mt-1">Unable to fetch PDA data from blockchain</div>
               </div>
             )}

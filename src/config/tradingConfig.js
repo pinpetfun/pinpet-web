@@ -10,7 +10,7 @@ export const SLIPPAGE_CONFIG = {
   MIN: 0.1,
   MAX: 99.9,
   DEFAULT: 15,
-  STORAGE_KEY: 'spinpet_slippage_settings'
+  STORAGE_KEY: 'pinpet_slippage_settings'
 };
 
 export const SPEED_OPTIONS = ['Fast', 'Turbo', 'Ultra'];

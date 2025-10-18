@@ -31,7 +31,7 @@ const TokenCard = ({
         <div className="flex-grow">
           <div className="flex justify-between items-start mb-1">
             <div>
-              <h3 className="text-xl font-fredoka">{name}</h3>
+              <h3 className="text-xl font-nunito">{name}</h3>
               <p className="text-xs text-gray-500">CA: {contractAddress}</p>
               {timeAgo && <p className="text-xs text-gray-400">{timeAgo}</p>}
             </div>
@@ -64,14 +64,14 @@ const TokenCard = ({
           src={image}
         />
         {isCompleted && (
-          <div className="absolute top-2 left-2 bg-black bg-opacity-70 px-2 py-1 rounded-full text-white text-xs font-fredoka border-2 border-white">
+          <div className="absolute top-2 left-2 bg-black bg-opacity-70 px-2 py-1 rounded-full text-white text-xs font-nunito border-2 border-white">
             Completed
           </div>
         )}
       </div>
       
       <div className="flex items-center justify-between mb-2">
-        <h3 className="text-lg font-fredoka">{name}</h3>
+        <h3 className="text-lg font-nunito">{name}</h3>
         <span className="text-xs text-gray-500">CA: {contractAddress}</span>
       </div>
       

@@ -3,7 +3,8 @@ import { ClipboardDocumentIcon, ShareIcon, StarIcon, Cog6ToothIcon, InformationC
 import { useTradingData } from '../../hooks/useTradingData.js';
 import { convertIpfsUrl, shortenAddress } from '../../config';
 import { PdaInfoDialog } from '../common';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
+import { getEmojiImage } from '../../config/emojiConfig';
 
 const TokenInfo = ({ 
   mintAddress,
@@ -11,7 +12,7 @@ const TokenInfo = ({
 }) => {
   // 获取 mintInfo 数据
   const { mintInfo, mintInfoLoading } = useTradingData(mintAddress);
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   
   // PDA信息对话框状态
   const [showPdaInfoDialog, setShowPdaInfoDialog] = useState(false);
@@ -44,27 +45,27 @@ const TokenInfo = ({
       return {
         tokenName: 'Loading...',
         creatorAddress: '...',
-        tokenImage: 'https://via.placeholder.com/80x80/CCCCCC/FFFFFF?text=...',
+        tokenImage: getEmojiImage('loading', 80),
         marketCap: 'Loading...',
         createdTime: 'Loading...'
       };
     }
-    
+
     if (mintInfo) {
       return {
         tokenName: mintInfo.symbol || 'BRONK',
         creatorAddress: shortenAddress(mintInfo.created_by) || 'FsbD...ZkDD',
-        tokenImage: convertIpfsUrl(mintInfo.uri_data?.image) || 'https://via.placeholder.com/80x80/FFA500/FFFFFF?text=B',
+        tokenImage: convertIpfsUrl(mintInfo.uri_data?.image) || getEmojiImage('token', 80),
         marketCap: formatMarketCap(mintInfo.total_sol_amount),
         createdTime: formatCreatedTime(mintInfo.create_timestamp)
       };
     }
-    
+
     // fallback data
     return {
       tokenName: 'BRONK',
       creatorAddress: 'FsbD...ZkDD',
-      tokenImage: 'https://via.placeholder.com/80x80/FFA500/FFFFFF?text=B',
+      tokenImage: getEmojiImage('token', 80),
       marketCap: '$16,561.13',
       createdTime: '2025/5/26 05:21:56'
     };
@@ -97,12 +98,12 @@ const TokenInfo = ({
           src={tokenImage}
         />
         <div>
-          <h3 className="text-3xl font-fredoka text-black">{tokenName}</h3>
-          <p className="text-base text-gray-600 font-fredoka">Creator: {creatorAddress}</p>
+          <h3 className="text-3xl font-nunito text-black">{tokenName}</h3>
+          <p className="text-base text-gray-600 font-nunito">Creator: {creatorAddress}</p>
         </div>
       </div>
       
-      <div className="flex flex-wrap items-center gap-4 text-base text-gray-600 font-fredoka">
+      <div className="flex flex-wrap items-center gap-4 text-base text-gray-600 font-nunito">
         <div className="flex items-center">
           <span>Contract: {contractAddress}</span>
           <button 

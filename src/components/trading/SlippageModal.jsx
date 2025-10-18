@@ -117,7 +117,7 @@ const SlippageModal = ({ isOpen, onClose, onSettingsChange }) => {
     >
       <div className="bg-gray-800 text-white rounded-2xl border-4 border-gray-600 p-6 max-w-md w-full mx-4 cartoon-shadow">
         {/* 标题 */}
-        <h3 className="text-lg font-fredoka text-white mb-4">
+        <h3 className="text-lg font-nunito text-white mb-4">
           set max. slippage (%)
         </h3>
 
@@ -127,7 +127,7 @@ const SlippageModal = ({ isOpen, onClose, onSettingsChange }) => {
             type="text"
             value={slippageInput}
             onChange={handleSlippageChange}
-            className="w-full bg-gray-700 text-white rounded-lg border-2 border-gray-600 px-4 py-3 text-lg font-fredoka focus:border-blue-400 focus:outline-none"
+            className="w-full bg-gray-700 text-white rounded-lg border-2 border-gray-600 px-4 py-3 text-lg font-nunito focus:border-blue-400 focus:outline-none"
             placeholder="2"
           />
           {inputError && (
@@ -141,7 +141,7 @@ const SlippageModal = ({ isOpen, onClose, onSettingsChange }) => {
         {/* Speed 选项 - 禁用状态 */}
         <div className="mb-6">
           <div className="text-white mb-2">
-            <span className="font-fredoka">speed:</span>
+            <span className="font-nunito">speed:</span>
             <span className="ml-2 opacity-50">
               {SPEED_OPTIONS.map((speed, index) => (
                 <span 
@@ -165,7 +165,7 @@ const SlippageModal = ({ isOpen, onClose, onSettingsChange }) => {
         {/* Front-running protection - 禁用状态 */}
         <div className="mb-6">
           <div className="flex items-center justify-between mb-2">
-            <span className="font-fredoka text-white">enable front-running protection:</span>
+            <span className="font-nunito text-white">enable front-running protection:</span>
             <div className="flex">
               <span className="px-3 py-1 rounded bg-gray-600 text-gray-300 text-sm opacity-50">On</span>
               <span className="px-3 py-1 rounded bg-gray-700 text-gray-400 text-sm ml-1 opacity-50">Off</span>
@@ -175,15 +175,15 @@ const SlippageModal = ({ isOpen, onClose, onSettingsChange }) => {
 
         {/* Tip amount - 禁用状态 */}
         <div className="mb-6">
-          <div className="text-white font-fredoka mb-2">tip amount</div>
+          <div className="text-white font-nunito mb-2">tip amount</div>
           <div className="flex items-center bg-gray-700 rounded-lg border-2 border-gray-600 opacity-50">
             <input
               type="text"
               value="0.003"
               disabled
-              className="flex-1 bg-transparent text-white px-4 py-3 font-fredoka focus:outline-none"
+              className="flex-1 bg-transparent text-white px-4 py-3 font-nunito focus:outline-none"
             />
-            <div className="px-4 py-3 text-white font-fredoka flex items-center">
+            <div className="px-4 py-3 text-white font-nunito flex items-center">
               SOL
               <div className="w-6 h-6 bg-gray-600 rounded ml-2"></div>
             </div>
@@ -197,7 +197,7 @@ const SlippageModal = ({ isOpen, onClose, onSettingsChange }) => {
         <div className="text-center">
           <button
             onClick={handleClose}
-            className="text-gray-400 hover:text-white font-fredoka text-sm transition-colors"
+            className="text-gray-400 hover:text-white font-nunito text-sm transition-colors"
           >
             [close]
           </button>
