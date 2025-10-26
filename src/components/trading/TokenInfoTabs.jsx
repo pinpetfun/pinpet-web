@@ -81,18 +81,18 @@ const TokenInfoTabs = ({ tokenName = "BRONK", mintAddress }) => {
   const tabContent = {
     info: (
       <div>
-        <h4 className="text-2xl font-fredoka mb-4 flex items-center">
+        <h4 className="text-2xl font-nunito mb-4 flex items-center">
           <InformationCircleIcon className="h-5 w-5 mr-2" />
           About Token
         </h4>
-        <p className="text-base text-black leading-relaxed font-fredoka">
+        <p className="text-base text-black leading-relaxed font-nunito">
           {getTokenDescription()}
         </p>
       </div>
     ),
     activity: (
       <div>
-        <h4 className="text-2xl font-fredoka mb-4 flex items-center">
+        <h4 className="text-2xl font-nunito mb-4 flex items-center">
           <ChartBarIcon className="h-5 w-5 mr-2" />
           Trading Activity {connectionStatus === 'connected' && (
             <span className="ml-2 text-xs bg-green-200 text-green-800 px-2 py-1 rounded-full">Live</span>
@@ -108,7 +108,7 @@ const TokenInfoTabs = ({ tokenName = "BRONK", mintAddress }) => {
             ))
           ) : (
             <div className="border-2 border-gray-200 rounded-lg p-3">
-              <p className="text-sm font-fredoka text-gray-600">
+              <p className="text-sm font-nunito text-gray-600">
                 {connectionStatus === 'connected' 
                   ? (historyLoaded ? 'No trading events found' : 'Loading trading events...') 
                   : 'Connection required to load trading events'
@@ -126,12 +126,12 @@ const TokenInfoTabs = ({ tokenName = "BRONK", mintAddress }) => {
     ),
     bubblemap: (
       <div>
-        <h4 className="text-2xl font-fredoka mb-4 flex items-center">
+        <h4 className="text-2xl font-nunito mb-4 flex items-center">
           <RectangleGroupIcon className="h-5 w-5 mr-2" />
           Bubblemap
         </h4>
         <div className="border-2 border-gray-200 rounded-lg p-8 text-center">
-          <p className="text-gray-600 font-fredoka">Bubblemap visualization coming soon</p>
+          <p className="text-gray-600 font-nunito">Bubblemap visualization coming soon</p>
         </div>
       </div>
     ),
@@ -143,7 +143,7 @@ const TokenInfoTabs = ({ tokenName = "BRONK", mintAddress }) => {
       <div className="flex border-b-2 border-gray-200 mb-6">
         <button 
           onClick={() => setActiveTab('info')}
-          className={`py-2 px-4 text-base font-fredoka transition-all ${
+          className={`py-2 px-4 text-base font-nunito transition-all ${
             activeTab === 'info' 
               ? 'border-b-3 border-orange-500 text-orange-500' 
               : 'text-gray-600 hover:text-black'
@@ -153,7 +153,7 @@ const TokenInfoTabs = ({ tokenName = "BRONK", mintAddress }) => {
         </button>
         <button 
           onClick={() => setActiveTab('activity')}
-          className={`py-2 px-4 text-base font-fredoka transition-all ${
+          className={`py-2 px-4 text-base font-nunito transition-all ${
             activeTab === 'activity' 
               ? 'border-b-3 border-orange-500 text-orange-500' 
               : 'text-gray-600 hover:text-black'
@@ -168,7 +168,7 @@ const TokenInfoTabs = ({ tokenName = "BRONK", mintAddress }) => {
         </button>
         <button 
           onClick={() => setActiveTab('bubblemap')}
-          className={`py-2 px-4 text-base font-fredoka transition-all ${
+          className={`py-2 px-4 text-base font-nunito transition-all ${
             activeTab === 'bubblemap' 
               ? 'border-b-3 border-orange-500 text-orange-500' 
               : 'text-gray-600 hover:text-black'

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchHotProjects } from '../../services/hotProjectsService';
 import { FireIcon } from '@heroicons/react/24/outline';
+import { getTokenEmojiImage, getCircleEmojiImage } from '../../config/emojiConfig';
 
 const HotProjectCard = ({ 
   name, 
@@ -24,17 +25,17 @@ const HotProjectCard = ({
       className="bg-white text-black rounded-2xl border-2 border-gray-300 hover:border-orange-400 transition-all duration-300 shadow-md flex flex-col overflow-hidden max-w-sm mx-auto transform hover:-translate-y-2 cursor-pointer"
       onClick={handleClick}
     >
-      <img 
-        alt="A cute pet illustration" 
-        className="w-full h-64 object-cover" 
-        src={petImage || `https://via.placeholder.com/400x200/${color}/FFFFFF?text=${name}`}
+      <img
+        alt="A cute pet illustration"
+        className="w-full h-64 object-cover"
+        src={petImage || getTokenEmojiImage(name, 400, 200, `#${color}`)}
       />
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center mb-2">
-          <img 
-            alt={`${name} logo`} 
-            className="w-10 h-10 rounded-full border-2 border-gray-200" 
-            src={`https://via.placeholder.com/40x40/${color}/FFFFFF?text=${name.charAt(0)}`}
+          <img
+            alt={`${name} logo`}
+            className="w-10 h-10 rounded-full border-2 border-gray-200"
+            src={getCircleEmojiImage('token', 40)}
           />
           <div className="ml-3">
             <h3 className="text-lg font-bold text-gray-800">{name}</h3>
@@ -107,16 +108,16 @@ const HotProjectsSection = () => {
   if (loading) {
     return (
       <div className="bg-cyan-300 border-4 border-black p-8 rounded-2xl mb-12 cartoon-shadow relative">
-        <div className="absolute -top-6 -left-6 bg-pink-500 text-white font-fredoka text-2xl px-4 py-2 rounded-full transform -rotate-12 border-2 border-black">
+        <div className="absolute -top-6 -left-6 bg-pink-500 text-white font-nunito text-2xl px-4 py-2 rounded-full transform -rotate-12 border-2 border-black">
           LIVE!
         </div>
         
         <div className="text-center mb-6">
-          <h2 className="text-4xl font-fredoka flex items-center justify-center text-black">
+          <h2 className="text-4xl font-nunito flex items-center justify-center text-black">
             <FireIcon className="mr-2 text-red-500 w-12 h-12 animate-bounce" />
             Hot Projects
           </h2>
-          <p className="mt-2 text-black font-fredoka text-lg">Join the hottest launches happening right now!</p>
+          <p className="mt-2 text-black font-nunito text-lg">Join the hottest launches happening right now!</p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -151,16 +152,16 @@ const HotProjectsSection = () => {
   if (error) {
     return (
       <div className="bg-cyan-300 border-4 border-black p-8 rounded-2xl mb-12 cartoon-shadow relative">
-        <div className="absolute -top-6 -left-6 bg-pink-500 text-white font-fredoka text-2xl px-4 py-2 rounded-full transform -rotate-12 border-2 border-black">
+        <div className="absolute -top-6 -left-6 bg-pink-500 text-white font-nunito text-2xl px-4 py-2 rounded-full transform -rotate-12 border-2 border-black">
           LIVE!
         </div>
         
         <div className="text-center mb-6">
-          <h2 className="text-4xl font-fredoka flex items-center justify-center text-black">
+          <h2 className="text-4xl font-nunito flex items-center justify-center text-black">
             <FireIcon className="mr-2 text-red-500 w-12 h-12 animate-bounce" />
             Hot Projects
           </h2>
-          <p className="mt-2 text-black font-fredoka text-lg">Join the hottest launches happening right now!</p>
+          <p className="mt-2 text-black font-nunito text-lg">Join the hottest launches happening right now!</p>
         </div>
         
         <div className="text-center py-8">
@@ -179,16 +180,16 @@ const HotProjectsSection = () => {
 
   return (
     <div className="bg-cyan-300 border-4 border-black p-8 rounded-2xl mb-12 cartoon-shadow relative">
-      <div className="absolute -top-6 -left-6 bg-pink-500 text-white font-fredoka text-2xl px-4 py-2 rounded-full transform -rotate-12 border-2 border-black">
+      <div className="absolute -top-6 -left-6 bg-pink-500 text-white font-nunito text-2xl px-4 py-2 rounded-full transform -rotate-12 border-2 border-black">
         LIVE!
       </div>
       
       <div className="text-center mb-6">
-        <h2 className="text-4xl font-fredoka flex items-center justify-center text-black">
+        <h2 className="text-4xl font-nunito flex items-center justify-center text-black">
           <FireIcon className="mr-2 text-red-500 w-12 h-12 animate-bounce" />
           Hot Projects
         </h2>
-        <p className="mt-2 text-black font-fredoka text-lg">Join the hottest launches happening right now!</p>
+        <p className="mt-2 text-black font-nunito text-lg">Join the hottest launches happening right now!</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

@@ -15,11 +15,11 @@ const DebugPage = () => {
   return (
     <main className="px-8 py-12 relative overflow-hidden">
       <div className="container mx-auto max-w-2xl">
-        <h1 className="text-4xl font-fredoka text-center mb-8">Debug</h1>
+        <h1 className="text-4xl font-nunito text-center mb-8">Debug</h1>
         
         {/* PDA Debug Section */}
         <div className="bg-white rounded-lg shadow-cartoon p-6 border-2 border-black">
-          <h2 className="text-2xl font-fredoka mb-4">PDA Info Viewer</h2>
+          <h2 className="text-2xl font-nunito mb-4">PDA Info Viewer</h2>
           
           {/* PDA Type Selection */}
           <div className="mb-4">
@@ -54,7 +54,7 @@ const DebugPage = () => {
           <button
             onClick={handleOpenPdaInfo}
             disabled={!pdaAddress.trim()}
-            className="btn-cartoon bg-orange-500 text-white px-6 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed font-fredoka"
+            className="btn-cartoon bg-orange-500 text-white px-6 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed font-nunito"
           >
             Open PDA Info
           </button>

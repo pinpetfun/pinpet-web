@@ -300,12 +300,12 @@ const TradingChart = ({ tokenName = "BRONK", tokenPrice = "0.0000007411", mintAd
     <div className="bg-white border-4 border-black rounded-2xl p-6 cartoon-shadow">
       {/* Chart Header */}
       <div className="flex items-center justify-between border-b-2 border-gray-200 pb-3 mb-4">
-        <div className="flex items-center space-x-4 text-base font-fredoka">
+        <div className="flex items-center space-x-4 text-base font-nunito">
           {/* 时间间隔选择器 */}
           <div className="relative" ref={dropdownRef}>
             <button 
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-              className="flex items-center px-3 py-1 bg-orange-300 hover:bg-orange-400 border-2 border-black rounded-lg transition-all duration-200 font-fredoka font-bold text-black cartoon-shadow hover:shadow-cartoon-sm active:translate-y-0.5"
+              className="flex items-center px-3 py-1 bg-orange-300 hover:bg-orange-400 border-2 border-black rounded-lg transition-all duration-200 font-nunito font-bold text-black cartoon-shadow hover:shadow-cartoon-sm active:translate-y-0.5"
             >
               {selectedTimeframe}
               <ChevronDownIcon className={`h-4 w-4 ml-1 transition-transform duration-200 ${isDropdownOpen ? 'rotate-180' : ''}`} />
@@ -318,7 +318,7 @@ const TradingChart = ({ tokenName = "BRONK", tokenPrice = "0.0000007411", mintAd
                   <button
                     key={option.value}
                     onClick={() => handleTimeframeSelect(option.value)}
-                    className={`w-full px-4 py-2 text-left font-fredoka font-bold transition-colors duration-150 hover:bg-orange-200 ${
+                    className={`w-full px-4 py-2 text-left font-nunito font-bold transition-colors duration-150 hover:bg-orange-200 ${
                       selectedTimeframe === option.value 
                         ? 'bg-orange-100 text-orange-800' 
                         : 'text-black hover:text-orange-800'
@@ -337,7 +337,7 @@ const TradingChart = ({ tokenName = "BRONK", tokenPrice = "0.0000007411", mintAd
           </button>
           
           {/* Token Name */}
-          <h2 className="text-xl font-fredoka text-black ml-6">{getTokenDisplayText()}</h2>
+          <h2 className="text-xl font-nunito text-black ml-6">{getTokenDisplayText()}</h2>
         </div>
         <div className="flex items-center space-x-4">
           {/* 当前价格 */}
@@ -362,7 +362,7 @@ const TradingChart = ({ tokenName = "BRONK", tokenPrice = "0.0000007411", mintAd
         
         {/* Chart Info Banner - TODO: 后面可能需要重新启用缩放提示功能 */}
         {/* <div className="absolute bottom-4 left-4 right-4 bg-blue-200 text-blue-900 text-sm px-4 py-2 rounded-lg flex justify-between items-center border-2 border-blue-900 cartoon-shadow">
-          <span className="font-fredoka">When you want to zoom in/out the vertical scale of the candlestick chart, please hold the CTRL key.</span>
+          <span className="font-nunito">When you want to zoom in/out the vertical scale of the candlestick chart, please hold the CTRL key.</span>
           <button className="text-blue-900 hover:text-blue-700">
             <XMarkIcon className="h-5 w-5" />
           </button>

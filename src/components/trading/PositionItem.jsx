@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast, PdaInfoDialog } from '../common';
 import PartialCloseDialog from './PartialCloseDialog';
+import { getEmojiImage } from '../../config/emojiConfig';
 
 const PositionItem = ({ position, onClose, onPartialClose, onInfo, onRefresh }) => {
   const {
@@ -29,7 +30,7 @@ const PositionItem = ({ position, onClose, onPartialClose, onInfo, onRefresh }) 
   } = position;
 
   // SDK 和钱包 hooks
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   const { walletAddress, connected } = useWalletContext();
   const { signTransaction } = useWallet();
 
@@ -271,17 +272,17 @@ const PositionItem = ({ position, onClose, onPartialClose, onInfo, onRefresh }) 
       <div className="flex items-center justify-between mb-3">
         {/* 左侧：代币信息 */}
         <div className="flex items-center space-x-3">
-          <img 
-            alt={`${pair} icon`} 
-            className="w-10 h-10 rounded-full border-2 border-gray-300" 
+          <img
+            alt={`${pair} icon`}
+            className="w-10 h-10 rounded-full border-2 border-gray-300"
             src={tokenImage}
             onError={(e) => {
-              e.target.src = 'https://via.placeholder.com/40/CCCCCC/666666?text=?';
+              e.target.src = getEmojiImage('default', 40);
             }}
           />
           <div>
             <div className="flex items-center space-x-2 mb-1">
-              <span className="font-fredoka text-lg text-black font-bold">{pair}</span>
+              <span className="font-nunito text-lg text-black font-bold">{pair}</span>
               <span className={`text-xs font-semibold ${directionStyles.tagText} ${directionStyles.tagBg} px-2 py-0.5 rounded-full`}>
                 {directionStyles.tagLabel}
               </span>
@@ -322,19 +323,19 @@ const PositionItem = ({ position, onClose, onPartialClose, onInfo, onRefresh }) 
         <button 
           onClick={handleClosePosition}
           disabled={isProcessing || !connected || !isReady}
-          className="w-full py-2 text-sm font-fredoka text-white bg-emerald-500 rounded-lg hover:bg-emerald-600 disabled:bg-gray-500 disabled:cursor-not-allowed transition-all duration-200 active:scale-95"
+          className="w-full py-2 text-sm font-nunito text-white bg-emerald-500 rounded-lg hover:bg-emerald-600 disabled:bg-gray-500 disabled:cursor-not-allowed transition-all duration-200 active:scale-95"
         >
           {isProcessing ? 'Closing...' : 'Close'}
         </button>
         <button 
           onClick={handlePartialClick}
-          className="w-full py-2 text-sm font-fredoka text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-all duration-200 active:scale-95"
+          className="w-full py-2 text-sm font-nunito text-white bg-orange-500 rounded-lg hover:bg-orange-600 transition-all duration-200 active:scale-95"
         >
           Partial
         </button>
         <button 
           onClick={handleInfoClick}
-          className="w-full py-2 text-sm font-fredoka text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-all duration-200 active:scale-95"
+          className="w-full py-2 text-sm font-nunito text-white bg-blue-500 rounded-lg hover:bg-blue-600 transition-all duration-200 active:scale-95"
         >
           Info
         </button>

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { calculateTokensFromSOL, formatDisplayNumber } from '../../utils/priceCalculator';
 import { Decimal } from 'decimal.js';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast } from '../common';
-import { getSlippageSettings } from '../../config/tradingConfig';
+import { getSlippageSettings, getActualSlippage } from '../../config/tradingConfig';
 
 const ShortPanel = React.memo(({
   tokenSymbol = "FRIENDS",
@@ -30,7 +30,7 @@ const ShortPanel = React.memo(({
   const [stopLossError, setStopLossError] = useState(null);
   
   // SDK 和钱包 hooks
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   const { walletAddress, connected } = useWalletContext();
   const { signTransaction } = useWallet();
   
@@ -360,6 +360,7 @@ const ShortPanel = React.memo(({
       // 获取滑点设置
       const slippageSettings = getSlippageSettings();
       const slippagePercent = slippageSettings.slippage;
+      const actualSlippage = getActualSlippage(slippagePercent);
 
       // 计算参数 - 使用 SDK 返回的值
       const originalSolAmount = parseFloat(amount);
@@ -370,10 +371,10 @@ const ShortPanel = React.memo(({
       const borrowSellTokenAmount = new anchor.BN(stopLossAnalysis.sellTokenAmount.toString());
 
       // 计算 minSolOutput (positionValue减去滑点，9位精度)
-      const minSolOutput = calculateMinSolOutput(leveragedSolAmount, slippagePercent);
-      
+      const minSolOutput = calculateMinSolOutput(leveragedSolAmount, actualSlippage);
+
       // 计算 marginSol (保证金加上滑点，9位精度)
-      const marginSol = calculateMaxMarginSol(originalSolAmount, slippagePercent);
+      const marginSol = calculateMaxMarginSol(originalSolAmount, actualSlippage);
       
       // 止损参数
       const closePrice = new anchor.BN(stopLossAnalysis.executableStopLossPrice.toString());
@@ -536,7 +537,7 @@ const ShortPanel = React.memo(({
     <div className="space-y-4">
 
       {/* Balance Display */}
-      <div className="text-gray-700 font-fredoka">
+      <div className="text-gray-700 font-nunito">
         balance: <span className="font-bold">{solBalance} SOL</span>
       </div>
 
@@ -551,19 +552,19 @@ const ShortPanel = React.memo(({
             placeholder="0"
           />
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <span className="text-black font-fredoka text-sm">SOL</span>
+            <span className="text-black font-nunito text-sm">SOL</span>
           </div>
         </div>
         <div className="flex flex-col items-center justify-center">
-          <div className="text-xs font-fredoka text-gray-500 leading-none">{getDynamicPercentage()}%</div>
-          <span className="text-xl font-fredoka font-bold">x {getDisplayLeverage().toFixed(1)} ≈</span>
+          <div className="text-xs font-nunito text-gray-500 leading-none">{getDynamicPercentage()}%</div>
+          <span className="text-xl font-nunito font-bold">x {getDisplayLeverage().toFixed(1)} ≈</span>
         </div>
         <div className="flex-1 relative">
           <div className="w-full bg-purple-100 text-black text-xl font-bold p-3 rounded-lg border-2 border-black">
             {getAdjustedPositionValue().toFixed(1)}
           </div>
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
-            <span className="text-black font-fredoka text-sm">SOL</span>
+            <span className="text-black font-nunito text-sm">SOL</span>
           </div>
         </div>
       </div>
@@ -572,46 +573,46 @@ const ShortPanel = React.memo(({
       <div className="flex space-x-2">
         <button
           onClick={() => handleQuickAmount('reset')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           Reset
         </button>
         <button
           onClick={() => handleQuickAmount('0.1')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           0.1 SOL
         </button>
         <button
           onClick={() => handleQuickAmount('0.5')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           0.5 SOL
         </button>
         <button
           onClick={() => handleQuickAmount('1')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           1 SOL
         </button>
         <button
           onClick={() => handleQuickAmount('max')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           Max
         </button>
       </div>
 
       {/* Calculated Result */}
-      <div className="text-center text-gray-700 font-fredoka">
+      <div className="text-center text-gray-700 font-nunito">
         You will short <span className="font-bold">{getDisplayTokens()}</span> {tokenSymbol} tokens
       </div>
 
       {/* Leverage Slider */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
-          <span className="font-fredoka font-bold text-gray-700">Leverage:</span>
-          <span className="font-fredoka font-bold text-xl">
+          <span className="font-nunito font-bold text-gray-700">Leverage:</span>
+          <span className="font-nunito font-bold text-xl">
             x{getDisplayLeverage().toFixed(1)}
           </span>
         </div>
@@ -631,7 +632,7 @@ const ShortPanel = React.memo(({
 
       {/* Stop Loss */}
       <div className="text-center">
-        <div className="font-fredoka font-bold text-lg mb-2">
+        <div className="font-nunito font-bold text-lg mb-2">
           {stopLossLoading ? (
             <span className="text-blue-600">Stop Loss Calculating...</span>
           ) : stopLossError ? (
@@ -658,7 +659,7 @@ const ShortPanel = React.memo(({
 
       {/* Insufficient Balance Warning */}
       {hasInsufficientBalance && (
-        <div className="text-red-500 text-sm font-fredoka">
+        <div className="text-red-500 text-sm font-nunito">
           Insufficient balance: you have {solBalance} SOL
         </div>
       )}
@@ -678,7 +679,7 @@ const ShortPanel = React.memo(({
           isProcessing ||
           !stopLossAnalysis?.executableStopLossPrice
         }
-        className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-fredoka font-bold border-2 border-black cartoon-shadow trading-button"
+        className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-nunito font-bold border-2 border-black cartoon-shadow trading-button"
       >
         {isProcessing 
           ? `Opening Short Position...` 

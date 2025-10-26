@@ -162,7 +162,7 @@ const WalletButton = () => {
               }`}
             >
               <UserIcon className="h-4 w-4" />
-              <span className="font-fredoka">Profile</span>
+              <span className="font-nunito">Profile</span>
             </button>
           )}
         </MenuItem>
@@ -176,7 +176,7 @@ const WalletButton = () => {
               }`}
             >
               <WalletIcon className="h-4 w-4" />
-              <span className="font-fredoka">View Wallet</span>
+              <span className="font-nunito">View Wallet</span>
             </button>
           )}
         </MenuItem>
@@ -190,7 +190,7 @@ const WalletButton = () => {
               }`}
             >
               <ClipboardDocumentIcon className="h-4 w-4" />
-              <span className="font-fredoka">Copy address</span>
+              <span className="font-nunito">Copy address</span>
             </button>
           )}
         </MenuItem>
@@ -204,7 +204,7 @@ const WalletButton = () => {
               }`}
             >
               <ArrowRightOnRectangleIcon className="h-4 w-4" />
-              <span className="font-fredoka">Log out</span>
+              <span className="font-nunito">Log out</span>
             </button>
           )}
         </MenuItem>
@@ -277,7 +277,7 @@ const WalletModal = ({ isOpen, onClose, wallets, onSelectWallet }) => {
       onClick={handleOverlayClick}
     >
       <div className="bg-white rounded-2xl border-4 border-black cartoon-shadow p-6 max-w-md w-full mx-4">
-        <h3 className="text-2xl font-fredoka text-gray-900 mb-4">Select Wallet</h3>
+        <h3 className="text-2xl font-nunito text-gray-900 mb-4">Select Wallet</h3>
         <div className="space-y-3">
           {wallets.length > 0 ? wallets.map((walletAdapter) => (
             <Button
@@ -290,7 +290,7 @@ const WalletModal = ({ isOpen, onClose, wallets, onSelectWallet }) => {
                 alt={walletAdapter.adapter.name}
                 className="w-8 h-8"
               />
-              <span className="font-fredoka">{walletAdapter.adapter.name}</span>
+              <span className="font-nunito">{walletAdapter.adapter.name}</span>
             </Button>
           )) : (
             <div className="text-gray-500 text-center py-4">

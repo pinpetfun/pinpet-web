@@ -147,7 +147,7 @@ import { TradingPanel, TradingChart } from './components/trading';
 ### 设计风格指南
 基于 `example/` 目录中的示例文件，项目采用：
 - **视觉风格**: 卡通风格界面 (Cartoon Style)
-- **字体**: Comic Neue, Fredoka One
+- **字体**: Nunito (全站统一使用)
 - **颜色主题**: 温暖色调，使用黄色、橙色、青色等亮色
 - **UI 元素**: 带阴影的卡片式设计，圆角边框
 - **交互**: 悬停效果，按钮按压动画
@@ -159,7 +159,7 @@ import { TradingPanel, TradingChart } from './components/trading';
 
 ### 卡通风格主题
 - **颜色方案**: 温暖色调，主要使用橙色(#FF8A65)、黄色、青色
-- **字体**: Fredoka One (标题) + Inter (正文)
+- **字体**: Nunito (全站统一使用，权重 400-900)
 - **阴影效果**: 使用 `shadow-cartoon` 和 `shadow-cartoon-sm` 类
 - **动画**: Framer Motion 实现悬停和过渡效果
 - **交互**: 按钮按压效果，卡片悬停上升

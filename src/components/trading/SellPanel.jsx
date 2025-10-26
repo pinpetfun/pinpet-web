@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { calculateSOLFromTokens, formatDisplayNumber } from '../../utils/priceCalculator';
-import { useSpinPetSdk } from '../../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../../contexts/PinPetSdkContext';
 import { useWalletContext } from '../../contexts/WalletContext';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import * as anchor from '@coral-xyz/anchor';
 import { TradingToast } from '../common';
+import { getActualSlippage } from '../../config/tradingConfig';
 
 const SellPanel = React.memo(({
   mintAddress = "",
@@ -27,7 +28,7 @@ const SellPanel = React.memo(({
   const [isOptimizing, setIsOptimizing] = useState(false);
   
   // SDK 和钱包 hooks
-  const { sdk, isReady } = useSpinPetSdk();
+  const { sdk, isReady } = usePinPetSdk();
   const { walletAddress, connected } = useWalletContext();
   const { signTransaction } = useWallet();
   
@@ -322,12 +323,14 @@ const SellPanel = React.memo(({
         calculatedSOLFloat = parseFloat(calculatedSOLStr.replace(/,/g, ''));
       }
       
-      const minSolOutput = calculateMinSolOutput(calculatedSOLFloat, slippageSettings.slippage);
+      const actualSlippage = getActualSlippage(slippageSettings.slippage);
+      const minSolOutput = calculateMinSolOutput(calculatedSOLFloat, actualSlippage);
 
       console.log('[SellPanel] 卖出参数:', {
         mintAddress,
         displayTokenAmount,
         slippagePercent: slippageSettings.slippage,
+        actualSlippagePercent: actualSlippage,
         calculatedSOL: calculatedSOLFloat,
         sellTokenAmount: sellTokenAmount.toString(),
         minSolOutput: minSolOutput.toString(),
@@ -436,7 +439,7 @@ const SellPanel = React.memo(({
   return (
     <div className="space-y-4">
       {/* Token Balance Display */}
-      <div className="text-gray-700 font-fredoka">
+      <div className="text-gray-700 font-nunito">
         {tokenSymbol} balance: <span className="font-bold">{tokenBalance}</span>
       </div>
 
@@ -450,7 +453,7 @@ const SellPanel = React.memo(({
           placeholder="0"
         />
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
-          <span className="text-black font-fredoka">{tokenSymbol}</span>
+          <span className="text-black font-nunito">{tokenSymbol}</span>
           <div className="w-6 h-6 bg-pink-500 rounded-full flex items-center justify-center">
             <span className="text-xs">🐾</span>
           </div>
@@ -461,31 +464,31 @@ const SellPanel = React.memo(({
       <div className="flex space-x-2">
         <button
           onClick={() => handlePercentage('reset')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           Reset
         </button>
         <button
           onClick={() => handlePercentage('25')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           25%
         </button>
         <button
           onClick={() => handlePercentage('50')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           50%
         </button>
         <button
           onClick={() => handlePercentage('75')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           75%
         </button>
         <button
           onClick={() => handlePercentage('100')}
-          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-fredoka text-xs hover:bg-gray-700 transition-colors"
+          className="flex-1 bg-gray-600 text-white py-2 px-1 rounded font-nunito text-xs hover:bg-gray-700 transition-colors"
         >
           100%
         </button>
@@ -493,13 +496,13 @@ const SellPanel = React.memo(({
 
       {/* Insufficient Balance Warning */}
       {hasInsufficientBalance && (
-        <div className="text-red-500 text-sm font-fredoka">
+        <div className="text-red-500 text-sm font-nunito">
           Insufficient balance: you have {tokenBalance} {tokenSymbol}
         </div>
       )}
 
       {/* Calculated Result */}
-      <div className="text-gray-700 font-fredoka text-lg">
+      <div className="text-gray-700 font-nunito text-lg">
         you receive {getDisplaySolAmount()} SOL
       </div>
 
@@ -517,7 +520,7 @@ const SellPanel = React.memo(({
           !mintAddress ||
           isProcessing
         }
-        className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-fredoka font-bold border-2 border-black cartoon-shadow trading-button"
+        className="w-full bg-red-500 hover:bg-red-600 disabled:bg-gray-500 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-nunito font-bold border-2 border-black cartoon-shadow trading-button"
       >
         {isProcessing 
           ? `Selling ${tokenSymbol}...` 

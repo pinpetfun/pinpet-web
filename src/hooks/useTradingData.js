@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { useSpinPetSdk } from '../contexts/SpinPetSdkContext';
+import { usePinPetSdk } from '../contexts/PinPetSdkContext';
 import { useWalletContext } from '../contexts/WalletContext';
 import { Connection, PublicKey } from '@solana/web3.js';
 import { config } from '../config';
@@ -9,7 +9,7 @@ import { config } from '../config';
  * 统一管理交易相关的订单数据和价格数据
  */
 export const useTradingData = (mintAddress, options = {}) => {
-  const { sdk, isReady, isError, error: sdkContextError } = useSpinPetSdk();
+  const { sdk, isReady, isError, error: sdkContextError } = usePinPetSdk();
   const { walletAddress, connected } = useWalletContext();
   
   // 数据状态
@@ -150,7 +150,7 @@ export const useTradingData = (mintAddress, options = {}) => {
 
   // 获取 Mint 信息
   const fetchMintInfo = useCallback(async (mintAddr) => {
-    if (!mintAddr || !config.spinpetApiUrl) {
+    if (!mintAddr || !config.pinpetApiUrl) {
       console.log('[TradingData] No mint address or API URL for mint info fetch');
       setMintInfo(null);
       return Promise.resolve(null);
@@ -162,7 +162,7 @@ export const useTradingData = (mintAddress, options = {}) => {
       
       console.log(`[TradingData] Fetching mint info for mint: ${mintAddr}`);
       
-      const response = await fetch(`${config.spinpetApiUrl}/api/details`, {
+      const response = await fetch(`${config.pinpetApiUrl}/api/details`, {
         method: 'POST',
         headers: {
           'accept': 'application/json',

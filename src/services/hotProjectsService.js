@@ -1,4 +1,5 @@
 import { config, convertIpfsUrl, shortenAddress } from '../config.js'
+import { getTokenEmojiImage } from '../config/emojiConfig'
 
 /**
  * 获取mints列表
@@ -6,7 +7,7 @@ import { config, convertIpfsUrl, shortenAddress } from '../config.js'
  */
 export const fetchMints = async () => {
   try {
-    const response = await fetch(`${config.spinpetApiUrl}/api/mints?page=1&limit=100&sort_by=slot_desc`, {
+    const response = await fetch(`${config.pinpetApiUrl}/api/mints?page=1&limit=100&sort_by=slot_desc`, {
       method: 'GET',
       headers: {
         'accept': 'application/json'
@@ -50,7 +51,7 @@ export const fetchMintDetails = async (mints) => {
   }
 
   try {
-    const response = await fetch(`${config.spinpetApiUrl}/api/details`, {
+    const response = await fetch(`${config.pinpetApiUrl}/api/details`, {
       method: 'POST',
       headers: {
         'accept': 'application/json',
@@ -101,9 +102,9 @@ export const transformToHotProject = (mintDetail) => {
   const isHot = Math.random() < 0.2
 
   // 转换图片URL
-  const petImage = mintDetail.uri_data?.image ? 
-    convertIpfsUrl(mintDetail.uri_data.image) : 
-    `https://via.placeholder.com/400x200/${randomColor}/FFFFFF?text=${mintDetail.symbol}`
+  const petImage = mintDetail.uri_data?.image ?
+    convertIpfsUrl(mintDetail.uri_data.image) :
+    getTokenEmojiImage(mintDetail.symbol, 400, 200, `#${randomColor}`)
 
   return {
     name: mintDetail.symbol || mintDetail.name || 'Unknown',

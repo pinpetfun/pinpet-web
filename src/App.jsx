@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
 import { clusterApiUrl } from '@solana/web3.js';
 
-// 导入自定义的 WalletProvider 和 SpinPetSdkProvider
+// 导入自定义的 WalletProvider 和 PinPetSdkProvider
 import { WalletProvider as CustomWalletProvider } from './contexts/WalletContext.jsx';
-import { SpinPetSdkProvider } from './contexts/SpinPetSdkContext.jsx';
+import { PinPetSdkProvider } from './contexts/PinPetSdkContext.jsx';
 import { WebSocketProvider } from './contexts/WebSocketContext.jsx';
 
 // 导入页面组件
@@ -23,7 +23,7 @@ function App() {
     <ConnectionProvider endpoint={endpoint}>
       <WalletProvider wallets={wallets} autoConnect>
         <CustomWalletProvider>
-          <SpinPetSdkProvider>
+          <PinPetSdkProvider>
             <WebSocketProvider>
               <Router>
               <div className="min-h-screen text-black">
@@ -33,8 +33,8 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/create" element={<CreatePage />} />
                   <Route path="/coin/:mintAddress" element={<TradeCenterPage />} />
-                  <Route path="/trending" element={<div className="p-8 text-center"><h1 className="text-4xl font-fredoka">Trending Page Coming Soon! 🚀</h1></div>} />
-                  <Route path="/resources" element={<div className="p-8 text-center"><h1 className="text-4xl font-fredoka">Resources Page Coming Soon! 📚</h1></div>} />
+                  <Route path="/trending" element={<div className="p-8 text-center"><h1 className="text-4xl font-nunito">Trending Page Coming Soon! 🚀</h1></div>} />
+                  <Route path="/resources" element={<div className="p-8 text-center"><h1 className="text-4xl font-nunito">Resources Page Coming Soon! 📚</h1></div>} />
                   <Route path="/debug" element={<DebugPage />} />
                 </Routes>
                 
@@ -42,7 +42,7 @@ function App() {
               </div>
               </Router>
             </WebSocketProvider>
-          </SpinPetSdkProvider>
+          </PinPetSdkProvider>
         </CustomWalletProvider>
       </WalletProvider>
     </ConnectionProvider>

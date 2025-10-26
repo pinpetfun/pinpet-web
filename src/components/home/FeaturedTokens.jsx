@@ -45,10 +45,10 @@ const FeaturedTokens = () => {
     return (
       <div className="relative z-10">
         <div className="text-left mb-6">
-          <h2 className="text-5xl font-fredoka text-orange-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-5xl font-nunito text-orange-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
             Featured Tokens
           </h2>
-          <p className="text-gray-600 font-fredoka text-xl">The hottest tokens right now, worth your attention.</p>
+          <p className="text-gray-600 font-nunito text-xl">The hottest tokens right now, worth your attention.</p>
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-x-2 gap-y-4 items-start" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'}}>
@@ -84,10 +84,10 @@ const FeaturedTokens = () => {
     return (
       <div className="relative z-10">
         <div className="text-left mb-6">
-          <h2 className="text-5xl font-fredoka text-orange-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+          <h2 className="text-5xl font-nunito text-orange-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
             Featured Tokens
           </h2>
-          <p className="text-gray-600 font-fredoka text-xl">The hottest tokens right now, worth your attention.</p>
+          <p className="text-gray-600 font-nunito text-xl">The hottest tokens right now, worth your attention.</p>
         </div>
         
         <div className="text-center py-8">
@@ -107,10 +107,10 @@ const FeaturedTokens = () => {
   return (
     <div className="relative z-10">
       <div className="text-left mb-6">
-        <h2 className="text-5xl font-fredoka text-orange-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
+        <h2 className="text-5xl font-nunito text-orange-500 drop-shadow-[3px_3px_0px_rgba(0,0,0,1)]">
           Featured Tokens
         </h2>
-        <p className="text-gray-600 font-fredoka text-xl">The hottest tokens right now, worth your attention.</p>
+        <p className="text-gray-600 font-nunito text-xl">The hottest tokens right now, worth your attention.</p>
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-x-2 gap-y-4 items-start" style={{gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'}}>

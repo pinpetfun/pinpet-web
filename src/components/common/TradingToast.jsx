@@ -66,7 +66,7 @@ const TradingToast = ({ isVisible, type, message, txHash, onClose }) => {
             {isSuccess ? '✓' : isError ? '✗' : 'i'}
           </div>
           <h3 className={`
-            text-lg font-fredoka font-bold
+            text-lg font-nunito font-bold
             ${isSuccess ? 'text-green-800' : isError ? 'text-red-800' : 'text-blue-800'}
           `}>
             {isSuccess ? '🎉 Transaction Successful!' : isError ? '❌ Transaction Failed' : '💫 Transaction In Progress'}
@@ -75,7 +75,7 @@ const TradingToast = ({ isVisible, type, message, txHash, onClose }) => {
 
         {/* 消息内容 */}
         <div className={`
-          text-sm font-fredoka mb-3
+          text-sm font-nunito mb-3
           ${isSuccess ? 'text-green-700' : isError ? 'text-red-700' : 'text-blue-700'}
         `}>
           {message}
@@ -84,7 +84,7 @@ const TradingToast = ({ isVisible, type, message, txHash, onClose }) => {
         {/* 交易哈希（仅成功时显示） */}
         {isSuccess && txHash && (
           <div className="space-y-2">
-            <div className="text-xs font-fredoka text-gray-600">
+            <div className="text-xs font-nunito text-gray-600">
               Transaction Hash:
             </div>
             <div className="bg-white border-2 border-gray-300 rounded-lg p-2">
@@ -98,7 +98,7 @@ const TradingToast = ({ isVisible, type, message, txHash, onClose }) => {
                 href={generateTxExplorerUrl(txHash)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-xs font-fredoka text-blue-600 hover:text-blue-800 underline"
+                className="inline-flex items-center text-xs font-nunito text-blue-600 hover:text-blue-800 underline"
               >
                 <span className="mr-1">🔍</span>
                 View on Explorer

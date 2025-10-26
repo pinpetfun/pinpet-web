@@ -29,12 +29,12 @@ export const WalletProvider = ({ children }) => {
         autoConnect: true
       };
       
-      localStorage.setItem('spinpet_wallet_connection', JSON.stringify(walletData));
+      localStorage.setItem('pinpet_wallet_connection', JSON.stringify(walletData));
       console.log('钱包连接成功:', walletData);
       setIsAutoConnecting(false);
     } else if (!connected && !connecting) {
       // 钱包断开，清除连接状态
-      localStorage.removeItem('spinpet_wallet_connection');
+      localStorage.removeItem('pinpet_wallet_connection');
       console.log('钱包已断开连接');
       setIsAutoConnecting(false);
     }
@@ -43,7 +43,7 @@ export const WalletProvider = ({ children }) => {
   // 应用启动时检查是否需要自动连接
   useEffect(() => {
     const checkAutoConnect = () => {
-      const savedConnection = localStorage.getItem('spinpet_wallet_connection');
+      const savedConnection = localStorage.getItem('pinpet_wallet_connection');
       if (savedConnection) {
         try {
           const connectionData = JSON.parse(savedConnection);
@@ -53,7 +53,7 @@ export const WalletProvider = ({ children }) => {
           }
         } catch (error) {
           console.error('恢复连接状态失败:', error);
-          localStorage.removeItem('spinpet_wallet_connection');
+          localStorage.removeItem('pinpet_wallet_connection');
         }
       }
       setIsAutoConnecting(false);
@@ -68,7 +68,7 @@ export const WalletProvider = ({ children }) => {
   const logout = async () => {
     try {
       await disconnect();
-      localStorage.removeItem('spinpet_wallet_connection');
+      localStorage.removeItem('pinpet_wallet_connection');
       console.log('用户手动登出');
     } catch (error) {
       console.error('登出失败:', error);
