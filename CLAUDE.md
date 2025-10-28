@@ -51,7 +51,7 @@ cp .env .env.local
 
 **在代码中使用**：
 ```javascript
-import { config } from './config.js'
+import { config } from './config.ts'
 console.log(config.serverUrl) // https://pinata-server.spin.pet
 ```
 
@@ -72,43 +72,43 @@ console.log(config.serverUrl) // https://pinata-server.spin.pet
 ### 目录结构
 ```
 src/
-├── App.jsx               # 主应用组件
-├── main.jsx              # 应用入口点
-├── config.js             # 环境变量配置管理
+├── App.tsx               # 主应用组件
+├── main.tsx              # 应用入口点
+├── config.ts             # 环境变量配置管理
 ├── App.css               # 应用样式
 ├── index.css             # 全局样式 (Tailwind + 自定义)
 ├── components/           # React 组件库 (已重构为模块化结构)
 │   ├── common/           # 通用组件
-│   │   ├── Header.jsx        # 页面头部导航
-│   │   ├── Footer.jsx        # 页面底部
-│   │   ├── WalletButton.jsx  # 钱包连接按钮
-│   │   ├── TokenCard.jsx     # 代币卡片组件
-│   │   ├── SdkTestComponent.jsx # SDK测试组件
-│   │   └── index.js          # 统一导出
+│   │   ├── Header.tsx        # 页面头部导航
+│   │   ├── Footer.tsx        # 页面底部
+│   │   ├── WalletButton.tsx  # 钱包连接按钮
+│   │   ├── TokenCard.tsx     # 代币卡片组件
+│   │   ├── SdkTestComponent.tsx # SDK测试组件
+│   │   └── index.ts          # 统一导出
 │   ├── pages/            # 页面级组件
-│   │   ├── HomePage.jsx      # 主页面
-│   │   ├── CreatePage.jsx    # 创建代币页面
-│   │   ├── TradeCenterPage.jsx # 交易中心页面
-│   │   └── index.js          # 统一导出
+│   │   ├── HomePage.tsx      # 主页面
+│   │   ├── CreatePage.tsx    # 创建代币页面
+│   │   ├── TradeCenterPage.tsx # 交易中心页面
+│   │   └── index.ts          # 统一导出
 │   ├── home/             # 首页相关组件
-│   │   ├── HeroSection.jsx   # 主页Hero区域
-│   │   ├── HotProjectsSection.jsx # 热门项目区域
-│   │   ├── FilterBar.jsx     # 筛选栏
-│   │   ├── FeaturedTokens.jsx # 精选代币
-│   │   └── index.js          # 统一导出
+│   │   ├── HeroSection.tsx   # 主页Hero区域
+│   │   ├── HotProjectsSection.tsx # 热门项目区域
+│   │   ├── FilterBar.tsx     # 筛选栏
+│   │   ├── FeaturedTokens.tsx # 精选代币
+│   │   └── index.ts          # 统一导出
 │   ├── trading/          # 交易相关组件
-│   │   ├── TradingPanel.jsx  # 交易面板
-│   │   ├── TradingChart.jsx  # 交易图表
-│   │   ├── TokenInfo.jsx     # 代币信息
-│   │   ├── TokenInfoTabs.jsx # 代币信息标签页
-│   │   └── index.js          # 统一导出
+│   │   ├── TradingPanel.tsx  # 交易面板
+│   │   ├── TradingChart.tsx  # 交易图表
+│   │   ├── TokenInfo.tsx     # 代币信息
+│   │   ├── TokenInfoTabs.tsx # 代币信息标签页
+│   │   └── index.ts          # 统一导出
 │   └── backup/           # 备份组件
-│       └── DropdownMenuTest.jsx
+│       └── DropdownMenuTest.tsx
 ├── contexts/             # React Context
 ├── services/             # 服务层
 ├── hooks/                # 自定义 Hooks
 ├── data/
-│   └── mockData.js       # 模拟数据
+│   └── mockData.ts       # 模拟数据
 └── assets/               # 静态资源
     └── react.svg
 
@@ -121,7 +121,7 @@ public/             # 公共静态资源
 ```
 
 ### 组件导入方式
-项目采用模块化导入方式，每个组件文件夹都有统一的 `index.js` 导出文件：
+项目采用模块化导入方式，每个组件文件夹都有统一的 `index.ts` 导出文件：
 
 ```javascript
 // 从不同模块导入组件
@@ -132,10 +132,10 @@ import { TradingPanel, TradingChart } from './components/trading';
 ```
 
 ### 关键配置文件
-- **vite.config.js**: Vite 配置，使用 SWC React 插件
-- **tailwind.config.js**: Tailwind CSS 配置，包含自定义主题和卡通风格
-- **postcss.config.js**: PostCSS 配置，集成 Tailwind CSS 和 Autoprefixer
-- **eslint.config.js**: ESLint 配置，包含 React、React Hooks 和 React Refresh 规则
+- **vite.config.ts**: Vite 配置，使用 SWC React 插件
+- **tailwind.config.ts**: Tailwind CSS 配置，包含自定义主题和卡通风格
+- **postcss.config.ts**: PostCSS 配置，集成 Tailwind CSS 和 Autoprefixer
+- **eslint.config.ts**: ESLint 配置，包含 React、React Hooks 和 React Refresh 规则
 - **package.json**: 项目依赖和脚本配置
 
 ### Spin SDK 集成
@@ -172,12 +172,12 @@ import { TradingPanel, TradingChart } from './components/trading';
 ## 开发注意事项
 
 1. **React 版本**: 使用 React 19.1.1，支持最新的 React 特性
-2. **TypeScript**: 当前使用 JavaScript，但项目结构支持升级到 TypeScript
+2. **TypeScript**: 当前使用 TypeScript
 3. **模块格式**: 使用 ES 模块 (`"type": "module"`)
 4. **热重载**: 通过 Vite 和 SWC 提供快速的热重载体验
 5. **代码规范**: ESLint 配置包含 React、React Hooks 最佳实践检查
 6. **环境变量**: 只有 `VITE_` 前缀的变量会暴露给客户端代码
-7. **配置管理**: 使用 `src/config.js` 集中管理所有配置项
+7. **配置管理**: 使用 `src/config.ts` 集中管理所有配置项
 8. **样式系统**: Tailwind CSS + 自定义卡通风格类
 
 ## 构建和部署

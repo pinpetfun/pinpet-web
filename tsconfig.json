@@ -1,0 +1,76 @@
+{
+  "compilerOptions": {
+    // 目标JavaScript版本 - 支持BigInt
+    "target": "ES2020",
+    // 使用的库
+    "lib": [
+      "ES2020",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    // 允许使用合成默认导入
+    "allowSyntheticDefaultImports": true,
+    // 启用ES模块互操作
+    "esModuleInterop": true,
+    // 放宽严格模式以减少迁移阻力
+    "strict": false,
+    "noImplicitAny": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    // 模块系统
+    "module": "ESNext",
+    // 模块解析策略
+    "moduleResolution": "bundler",
+    // 允许导入JSON文件
+    "resolveJsonModule": true,
+    // 隔离模块
+    "isolatedModules": true,
+    // 不生成输出文件
+    "noEmit": true,
+    // JSX处理方式
+    "jsx": "react-jsx",
+    // 跳过库检查以提高性能
+    "skipLibCheck": true,
+    // 强制文件名一致性检查
+    "forceConsistentCasingInFileNames": true,
+    // 允许导入.ts文件时省略扩展名
+    "allowImportingTsExtensions": true,
+    // 允许未使用的变量和参数
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    // 基础URL
+    "baseUrl": ".",
+    // 路径映射
+    "paths": {
+      "@/*": ["src/*"],
+      "@/components/*": ["src/components/*"],
+      "@/hooks/*": ["src/hooks/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/services/*": ["src/services/*"],
+      "@/contexts/*": ["src/contexts/*"],
+      "@/modules/*": ["src/modules/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/config/*": ["src/config/*"],
+      "@/types/*": ["src/types/*"]
+    },
+    // 类型声明文件
+    "types": [
+      "vite/client",
+      "node"
+    ]
+  },
+  // 包含的文件
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx",
+    "vite.config.ts"
+  ],
+  // 排除的文件
+  "exclude": [
+    "node_modules",
+    "dist",
+    "target"
+  ]
+}
