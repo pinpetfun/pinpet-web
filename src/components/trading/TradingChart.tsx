@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { createChart, CandlestickSeries, ColorType } from 'lightweight-charts';
 import { ChevronDownIcon, ChartBarIcon, ArrowsPointingOutIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useWebSocket } from '../../contexts/WebSocketContext.jsx';
-import { useTradingData } from '../../hooks/useTradingData.js';
+import { useTradingData } from '../../hooks/useTradingData.ts';
 
 const TradingChart = ({ tokenName = "BRONK", _tokenPrice = "0.0000007411", mintAddress }) => {
   // 获取 mintInfo 数据
